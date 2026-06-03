@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/*
+  Invictus Law — Design System
+  Dark luxury aesthetic. Tokens map to the brand palette.
+*/
+
+@theme {
+  /* Brand palette */
+  --color-ink: #0a0a0a;        /* primary background */
+  --color-ink-2: #121212;      /* secondary background */
+  --color-steel: #2b2b2b;      /* steel grey / borders */
+  --color-mute: #a0a0a0;       /* light grey text */
+  --color-silver: #c0c0c0;     /* subtle silver accent */
+  --color-silver-bright: #e6e6e6;
+
+  /* Semantic */
+  --color-background: var(--color-ink);
+  --color-foreground: #ffffff;
+
+  /* Fonts (wired up in layout.tsx via next/font) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  /* Easing for elegant transitions */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  border-color: var(--color-steel);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle silver selection */
+::selection {
+  background: rgba(192, 192, 192, 0.22);
+  color: #ffffff;
+}
+
+/* Custom scrollbar — restrained, on-brand */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-steel);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+/* Focus ring — accessible + on-brand */
+:focus-visible {
+  outline: 2px solid var(--color-silver);
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  /* Silver gradient text for headlines */
+  .text-gradient-silver {
+    background: linear-gradient(180deg, #ffffff 0%, #c0c0c0 60%, #8a8a8a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Thin uppercase eyebrow label */
+  .eyebrow {
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  /* Faint hairline divider */
+  .hairline {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(192, 192, 192, 0.25),
+      transparent
+    );
+  }
+
+  /* Premium glass card surface */
+  .surface {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(192, 192, 192, 0.1);
+    backdrop-filter: blur(6px);
+  }
+
+  .surface-hover {
+    transition: border-color 0.5s var(--ease-lux), background 0.5s var(--ease-lux), transform 0.5s var(--ease-lux);
+  }
+  .surface-hover:hover {
+    border-color: rgba(192, 192, 192, 0.32);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
