@@ -4,18 +4,18 @@ import { Section } from "@/components/ui/Section";
 import { BookingForm } from "@/components/booking/BookingForm";
 
 export const metadata: Metadata = {
-  title: "Book a Consultation",
+  title: "Konsultation",
   description:
-    "Schedule your free 30-minute consultation with Invictus Law. Choose a practice area, pick a time, and tell us about your matter.",
+    "Boka din kostnadsfria 30-minuterskonsultation. Välj rättsområde, välj en tid som passar dig och dela några detaljer.",
 };
 
 export default function ConsultationPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Book a Consultation"
-        title="Schedule your free 30-minute consultation"
-        intro="Three quick steps. Choose your service, pick a time that suits you, and share a few details — we'll take it from there."
+        eyebrow="Boka en konsultation"
+        title="Boka din kostnadsfria 30-minuterskonsultation"
+        intro="Tre snabba steg. Välj din tjänst, välj en tid som passar dig och dela några detaljer – vi tar det därifrån."
       />
       <Section className="!pt-14">
         <BookingForm />

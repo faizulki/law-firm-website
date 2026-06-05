@@ -24,9 +24,10 @@ export const site = {
 
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Consultation", href: "/consultation" },
+  { label: "Om oss", href: "/about" },
+  { label: "Våra rättsområden", href: "/services" },
+  { label: "Konsultation", href: "/consultation" },
+  { label: "Priser", href: "/priser" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

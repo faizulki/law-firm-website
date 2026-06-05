@@ -6,9 +6,11 @@ import { Button } from "./ui/Button";
 export function CTABanner({
   title = "Schedule Your Free 30-Minute Consultation",
   subtitle = "Tell us about your situation. We will review your matter and outline a clear, strategic path forward — no obligation.",
+  buttonLabel = "Book Consultation",
 }: {
   title?: string;
   subtitle?: string;
+  buttonLabel?: string;
 }) {
   return (
     <section className="px-6 py-20 lg:px-8 lg:py-28">
@@ -25,7 +27,7 @@ export function CTABanner({
           <p className="mx-auto mt-5 max-w-2xl text-lg text-mute">{subtitle}</p>
           <div className="mt-9 flex justify-center">
             <Button href="/consultation" size="lg">
-              Book Consultation
+              {buttonLabel}
               <ArrowRight size={18} />
             </Button>
           </div>

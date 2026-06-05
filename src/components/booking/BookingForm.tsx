@@ -28,7 +28,7 @@ import { practiceAreas } from "@/lib/content";
 
 type Step = 0 | 1 | 2;
 
-const STEPS = ["Service", "Date & Time", "Your Details"];
+const STEPS = ["Rättsområde", "Datum & Tid", "Dina detaljer"];
 
 function formatLongDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
@@ -259,7 +259,7 @@ export function BookingForm() {
             {step === 2 && (
               <motion.div key="step-2" {...fade}>
                 <h3 className="font-serif text-2xl font-medium text-white">
-                  Your details
+                  Dina detaljer
                 </h3>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
                   <Field
@@ -364,7 +364,7 @@ export function BookingForm() {
             Your consultation
           </h4>
           <dl className="mt-5 space-y-4 text-sm">
-            <SummaryRow label="Service" value={serviceArea} />
+            <SummaryRow label="Rättsområde" value={serviceArea} />
             <SummaryRow label="Format" value={consultationType} />
             <SummaryRow
               label="Date"
@@ -487,7 +487,7 @@ function Confirmation({ booking }: { booking: Booking }) {
 
       <div className="surface mt-8 rounded-2xl p-6 text-left">
         <dl className="space-y-4 text-sm">
-          <SummaryRow label="Service" value={booking.serviceArea} />
+          <SummaryRow label="Rättsområde" value={booking.serviceArea} />
           <SummaryRow label="Format" value={booking.consultationType} />
           <SummaryRow
             label="Date"
