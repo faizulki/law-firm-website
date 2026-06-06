@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/PageHeader";
-import { Section } from "@/components/ui/Section";
-import { BookingForm } from "@/components/booking/BookingForm";
+import { ConsultationView } from "@/components/views/ConsultationView";
 
 export const metadata: Metadata = {
   title: "Konsultation",
@@ -10,16 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ConsultationPage() {
-  return (
-    <>
-      <PageHeader
-        eyebrow="Boka en konsultation"
-        title="Boka din kostnadsfria 30-minuterskonsultation"
-        intro="Tre snabba steg. Välj din tjänst, välj en tid som passar dig och dela några detaljer – vi tar det därifrån."
-      />
-      <Section className="!pt-14">
-        <BookingForm />
-      </Section>
-    </>
-  );
+  return <ConsultationView />;
 }

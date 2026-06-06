@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useT } from "@/lib/i18n";
 import { Button } from "./ui/Button";
 
 /**
@@ -10,6 +11,7 @@ import { Button } from "./ui/Button";
  * layered gradient so headline contrast stays AA-compliant.
  */
 export function Hero() {
+  const t = useT();
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       {/* Background image */}
@@ -37,7 +39,7 @@ export function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="eyebrow mb-6 text-xs font-medium text-silver/80"
           >
-            Invictus Law · Attorneys & Counselors
+            {t.hero.eyebrow}
           </motion.p>
 
           <motion.h1
@@ -46,9 +48,9 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif text-5xl font-medium leading-[1.05] tracking-tight text-gradient-silver sm:text-6xl lg:text-7xl"
           >
-            Justice Without
+            {t.hero.line1}
             <br />
-            Compromise
+            {t.hero.line2}
           </motion.h1>
 
           <motion.p
@@ -57,8 +59,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-mute sm:text-xl"
           >
-            Experienced legal representation for individuals and businesses
-            seeking strategic, effective, and results-driven counsel.
+            {t.hero.sub}
           </motion.p>
 
           <motion.div
@@ -68,11 +69,11 @@ export function Hero() {
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
             <Button href="/consultation" size="lg">
-              Schedule Consultation
+              {t.hero.ctaPrimary}
               <ArrowRight size={18} />
             </Button>
             <Button href="/services" size="lg" variant="secondary">
-              Learn More
+              {t.hero.ctaSecondary}
             </Button>
           </motion.div>
         </div>

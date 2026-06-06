@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { useT, fmt } from "@/lib/i18n";
 import { Button } from "./ui/Button";
 
 /**
@@ -25,6 +26,7 @@ function persistMessage(data: FormState) {
 }
 
 export function ContactForm() {
+  const t = useT();
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -41,11 +43,11 @@ export function ContactForm() {
 
   function validate(): boolean {
     const next: Record<string, string> = {};
-    if (!form.name.trim()) next.name = "Please enter your name.";
-    if (!form.email.trim()) next.email = "Please enter your email.";
+    if (!form.name.trim()) next.name = t.contact.errName;
+    if (!form.email.trim()) next.email = t.contact.errEmail;
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      next.email = "Please enter a valid email.";
-    if (!form.message.trim()) next.message = "Please enter a message.";
+      next.email = t.contact.errEmailValid;
+    if (!form.message.trim()) next.message = t.contact.errMessage;
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -69,11 +71,10 @@ export function ContactForm() {
       >
         <CheckCircle2 size={44} className="text-silver" />
         <h3 className="mt-6 font-serif text-2xl font-medium text-white">
-          Message received
+          {t.contact.received}
         </h3>
         <p className="mt-3 max-w-sm text-sm text-mute">
-          Thank you, {form.name.split(" ")[0]}. A member of our team will be in
-          touch within one business day.
+          {fmt(t.contact.receivedDesc, { name: form.name.split(" ")[0] })}
         </p>
         <Button
           variant="secondary"
@@ -83,7 +84,7 @@ export function ContactForm() {
             setSent(false);
           }}
         >
-          Send another message
+          {t.contact.sendAnother}
         </Button>
       </motion.div>
     );
@@ -94,7 +95,7 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <FormField
           id="c-name"
-          label="Full name"
+          label={t.contact.formName}
           value={form.name}
           onChange={(v) => update("name", v)}
           error={errors.name}
@@ -102,7 +103,7 @@ export function ContactForm() {
         />
         <FormField
           id="c-phone"
-          label="Phone (optional)"
+          label={t.contact.formPhone}
           type="tel"
           value={form.phone}
           onChange={(v) => update("phone", v)}
@@ -111,7 +112,7 @@ export function ContactForm() {
         <div className="sm:col-span-2">
           <FormField
             id="c-email"
-            label="Email address"
+            label={t.contact.formEmail}
             type="email"
             value={form.email}
             onChange={(v) => update("email", v)}
@@ -124,7 +125,7 @@ export function ContactForm() {
             htmlFor="c-message"
             className="mb-2 block text-sm font-medium text-mute"
           >
-            How can we help?
+            {t.contact.howCanWeHelp}
           </label>
           <textarea
             id="c-message"
@@ -132,7 +133,7 @@ export function ContactForm() {
             value={form.message}
             onChange={(e) => update("message", e.target.value)}
             aria-invalid={Boolean(errors.message)}
-            placeholder="Tell us a little about your legal matter."
+            placeholder={t.contact.messagePlaceholder}
             className={cn(
               "w-full resize-none rounded-xl border bg-ink-2 px-4 py-3 text-white placeholder:text-mute/50 outline-none transition-colors",
               errors.message ? "border-red-500/60" : "border-steel focus:border-silver/60"
@@ -147,10 +148,10 @@ export function ContactForm() {
       <Button type="submit" size="lg" className="mt-7 w-full sm:w-auto" disabled={sending}>
         {sending ? (
           <>
-            <Loader2 size={16} className="animate-spin" /> Sending…
+            <Loader2 size={16} className="animate-spin" /> {t.contact.sending}
           </>
         ) : (
-          "Send Message"
+          t.contact.sendMessage
         )}
       </Button>
     </form>

@@ -18,13 +18,18 @@
  *   export const bookingProvider: BookingProvider = new CalendlyProvider();
  */
 
-export type ConsultationType =
-  | "Personal Meeting"
-  | "Video Consultation"
-  | "Telephone Consultation";
+/** Stable, language-independent id for the consultation format. */
+export type ConsultationType = "personal" | "video" | "phone";
+
+export const CONSULTATION_TYPE_IDS: ConsultationType[] = [
+  "personal",
+  "video",
+  "phone",
+];
 
 export type BookingInput = {
-  serviceArea: string;
+  serviceAreaSlug: string;
+  serviceArea: string; // resolved label at submit time (for the demo record)
   consultationType: ConsultationType;
   date: string; // ISO yyyy-mm-dd
   time: string; // HH:mm
@@ -109,24 +114,3 @@ export const TIME_SLOTS = [
   "16:30",
 ] as const;
 
-export const CONSULTATION_TYPES: {
-  value: ConsultationType;
-  duration: string;
-  description: string;
-}[] = [
-  {
-    value: "Personal Meeting",
-    duration: "30 min · In person",
-    description: "Meet your attorney at our New York office.",
-  },
-  {
-    value: "Video Consultation",
-    duration: "30 min · Video call",
-    description: "A secure video call from anywhere.",
-  },
-  {
-    value: "Telephone Consultation",
-    duration: "30 min · Phone",
-    description: "A focused call at your scheduled time.",
-  },
-];

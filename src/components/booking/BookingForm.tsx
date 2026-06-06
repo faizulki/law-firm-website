@@ -15,24 +15,23 @@ import {
   User,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { useLang, fmt, type Dict } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Calendar } from "./Calendar";
 import {
   bookingProvider,
-  CONSULTATION_TYPES,
   TIME_SLOTS,
   type Booking,
   type ConsultationType,
 } from "@/lib/booking";
-import { practiceAreas } from "@/lib/content";
+import { practiceAreas, pick } from "@/lib/content";
+import { site } from "@/lib/site";
 
 type Step = 0 | 1 | 2;
 
-const STEPS = ["Rättsområde", "Datum & Tid", "Dina detaljer"];
-
-function formatLongDate(iso: string): string {
+function formatLongDate(iso: string, locale: string): string {
   const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("en-US", {
+  return new Date(y, m - 1, d).toLocaleDateString(locale, {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -48,15 +47,23 @@ const fade = {
 };
 
 export function BookingForm() {
+  const { t, lang } = useLang();
+  const STEPS = t.booking.steps;
+
+  const types: { id: ConsultationType; label: string; duration: string; desc: string }[] = [
+    { id: "personal", ...t.booking.types.personal },
+    { id: "video", ...t.booking.types.video },
+    { id: "phone", ...t.booking.types.phone },
+  ];
+
   const [step, setStep] = useState<Step>(0);
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState<Booking | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Form state
-  const [serviceArea, setServiceArea] = useState(practiceAreas[0].title);
-  const [consultationType, setConsultationType] =
-    useState<ConsultationType>("Personal Meeting");
+  const [serviceSlug, setServiceSlug] = useState(practiceAreas[0].slug);
+  const [consultationType, setConsultationType] = useState<ConsultationType>("personal");
   const [date, setDate] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [name, setName] = useState("");
@@ -64,19 +71,24 @@ export function BookingForm() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
+  const currentArea = practiceAreas.find((a) => a.slug === serviceSlug)!;
+  const serviceLabel = pick(currentArea.title, lang);
+  const typeLabel = (id: ConsultationType) =>
+    types.find((x) => x.id === id)?.label ?? id;
+
   const stepValid = useMemo(() => {
-    if (step === 0) return Boolean(serviceArea && consultationType);
+    if (step === 0) return Boolean(serviceSlug && consultationType);
     if (step === 1) return Boolean(date && time);
     return true;
-  }, [step, serviceArea, consultationType, date, time]);
+  }, [step, serviceSlug, consultationType, date, time]);
 
   function validateDetails(): boolean {
     const next: Record<string, string> = {};
-    if (!name.trim()) next.name = "Please enter your name.";
-    if (!email.trim()) next.email = "Please enter your email.";
+    if (!name.trim()) next.name = t.booking.errName;
+    if (!email.trim()) next.email = t.booking.errEmail;
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      next.email = "Please enter a valid email address.";
-    if (!phone.trim()) next.phone = "Please enter a phone number.";
+      next.email = t.booking.errEmailValid;
+    if (!phone.trim()) next.phone = t.booking.errPhone;
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -87,7 +99,8 @@ export function BookingForm() {
     setSubmitting(true);
     try {
       const booking = await bookingProvider.createBooking({
-        serviceArea,
+        serviceAreaSlug: serviceSlug,
+        serviceArea: serviceLabel,
         consultationType,
         date,
         time,
@@ -102,9 +115,15 @@ export function BookingForm() {
     }
   }
 
-  // ---- Confirmation screen ----
   if (confirmed) {
-    return <Confirmation booking={confirmed} />;
+    return (
+      <Confirmation
+        booking={confirmed}
+        t={t}
+        locale={t.locale}
+        typeLabel={typeLabel(confirmed.consultationType)}
+      />
+    );
   }
 
   return (
@@ -151,38 +170,38 @@ export function BookingForm() {
               <motion.div key="step-0" {...fade}>
                 <fieldset>
                   <legend className="font-serif text-2xl font-medium text-white">
-                    What can we help you with?
+                    {t.booking.step1Title}
                   </legend>
                   <label
                     htmlFor="serviceArea"
                     className="mt-6 block text-sm font-medium text-mute"
                   >
-                    Practice area
+                    {t.booking.practiceAreaLabel}
                   </label>
                   <select
                     id="serviceArea"
-                    value={serviceArea}
-                    onChange={(e) => setServiceArea(e.target.value)}
+                    value={serviceSlug}
+                    onChange={(e) => setServiceSlug(e.target.value)}
                     className="mt-2 w-full rounded-xl border border-steel bg-ink-2 px-4 py-3 text-white outline-none transition-colors focus:border-silver/60"
                   >
                     {practiceAreas.map((a) => (
-                      <option key={a.slug} value={a.title}>
-                        {a.title}
+                      <option key={a.slug} value={a.slug}>
+                        {pick(a.title, lang)}
                       </option>
                     ))}
                   </select>
 
                   <p className="mt-8 text-sm font-medium text-mute">
-                    Consultation format
+                    {t.booking.formatLabel}
                   </p>
                   <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                    {CONSULTATION_TYPES.map((opt) => {
-                      const selected = consultationType === opt.value;
+                    {types.map((opt) => {
+                      const selected = consultationType === opt.id;
                       return (
                         <button
                           type="button"
-                          key={opt.value}
-                          onClick={() => setConsultationType(opt.value)}
+                          key={opt.id}
+                          onClick={() => setConsultationType(opt.id)}
                           aria-pressed={selected}
                           className={cn(
                             "rounded-xl border p-4 text-left transition-all duration-300",
@@ -192,13 +211,13 @@ export function BookingForm() {
                           )}
                         >
                           <span className="block text-sm font-medium text-white">
-                            {opt.value}
+                            {opt.label}
                           </span>
                           <span className="mt-1 block text-xs text-silver/80">
                             {opt.duration}
                           </span>
                           <span className="mt-2 block text-xs leading-relaxed text-mute">
-                            {opt.description}
+                            {opt.desc}
                           </span>
                         </button>
                       );
@@ -212,15 +231,17 @@ export function BookingForm() {
             {step === 1 && (
               <motion.div key="step-1" {...fade}>
                 <h3 className="font-serif text-2xl font-medium text-white">
-                  Choose a date &amp; time
+                  {t.booking.step2Title}
                 </h3>
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
                   <Calendar value={date} onChange={(iso) => setDate(iso)} />
                   <div>
                     <p className="text-sm font-medium text-mute">
-                      Available times{" "}
+                      {t.booking.availableTimes}{" "}
                       {date && (
-                        <span className="text-silver">· {formatLongDate(date)}</span>
+                        <span className="text-silver">
+                          · {formatLongDate(date, t.locale)}
+                        </span>
                       )}
                     </p>
                     {date ? (
@@ -247,7 +268,7 @@ export function BookingForm() {
                       </div>
                     ) : (
                       <div className="mt-3 flex h-40 items-center justify-center rounded-xl border border-dashed border-steel text-sm text-mute">
-                        Select a date to see available times
+                        {t.booking.selectDate}
                       </div>
                     )}
                   </div>
@@ -259,12 +280,12 @@ export function BookingForm() {
             {step === 2 && (
               <motion.div key="step-2" {...fade}>
                 <h3 className="font-serif text-2xl font-medium text-white">
-                  Dina detaljer
+                  {t.booking.step3Title}
                 </h3>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
                   <Field
                     id="name"
-                    label="Full name"
+                    label={t.booking.fullName}
                     icon={User}
                     value={name}
                     onChange={setName}
@@ -273,7 +294,7 @@ export function BookingForm() {
                   />
                   <Field
                     id="phone"
-                    label="Phone number"
+                    label={t.booking.phone}
                     icon={Phone}
                     type="tel"
                     value={phone}
@@ -284,7 +305,7 @@ export function BookingForm() {
                   <div className="sm:col-span-2">
                     <Field
                       id="email"
-                      label="Email address"
+                      label={t.booking.email}
                       icon={Mail}
                       type="email"
                       value={email}
@@ -298,23 +319,21 @@ export function BookingForm() {
                       htmlFor="message"
                       className="mb-2 block text-sm font-medium text-mute"
                     >
-                      Briefly describe your matter{" "}
-                      <span className="text-mute/60">(optional)</span>
+                      {t.booking.matterLabel}{" "}
+                      <span className="text-mute/60">{t.booking.matterOptional}</span>
                     </label>
                     <textarea
                       id="message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       rows={4}
-                      placeholder="Share any details that will help us prepare for your consultation."
+                      placeholder={t.booking.matterPlaceholder}
                       className="w-full resize-none rounded-xl border border-steel bg-ink-2 px-4 py-3 text-white placeholder:text-mute/50 outline-none transition-colors focus:border-silver/60"
                     />
                   </div>
                 </div>
                 <p className="mt-5 text-xs leading-relaxed text-mute/70">
-                  By submitting, you agree to be contacted regarding your
-                  consultation. Submitting this form does not create an
-                  attorney–client relationship.
+                  {t.booking.agreement}
                 </p>
               </motion.div>
             )}
@@ -328,7 +347,7 @@ export function BookingForm() {
                 onClick={() => setStep((s) => (s - 1) as Step)}
                 className="inline-flex items-center gap-2 text-sm text-mute transition-colors hover:text-white"
               >
-                <ArrowLeft size={16} /> Back
+                <ArrowLeft size={16} /> {t.booking.back}
               </button>
             ) : (
               <span />
@@ -340,16 +359,16 @@ export function BookingForm() {
                 onClick={() => stepValid && setStep((s) => (s + 1) as Step)}
                 disabled={!stepValid}
               >
-                Continue <ArrowRight size={16} />
+                {t.booking.continue} <ArrowRight size={16} />
               </Button>
             ) : (
               <Button type="submit" disabled={submitting}>
                 {submitting ? (
                   <>
-                    <Loader2 size={16} className="animate-spin" /> Booking…
+                    <Loader2 size={16} className="animate-spin" /> {t.booking.booking}
                   </>
                 ) : (
-                  <>Confirm Booking</>
+                  <>{t.booking.confirm}</>
                 )}
               </Button>
             )}
@@ -361,26 +380,21 @@ export function BookingForm() {
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <div className="surface rounded-2xl p-6">
           <h4 className="eyebrow text-xs font-medium text-silver/80">
-            Your consultation
+            {t.booking.summaryTitle}
           </h4>
           <dl className="mt-5 space-y-4 text-sm">
-            <SummaryRow label="Rättsområde" value={serviceArea} />
-            <SummaryRow label="Format" value={consultationType} />
+            <SummaryRow label={t.booking.fmtService} value={serviceLabel} />
+            <SummaryRow label={t.booking.fmtFormat} value={typeLabel(consultationType)} />
             <SummaryRow
-              label="Date"
-              value={date ? formatLongDate(date) : "—"}
+              label={t.booking.fmtDate}
+              value={date ? formatLongDate(date, t.locale) : "—"}
               icon={CalendarIcon}
             />
-            <SummaryRow label="Time" value={time ?? "—"} icon={Clock} />
+            <SummaryRow label={t.booking.fmtTime} value={time ?? "—"} icon={Clock} />
           </dl>
           <div className="mt-6 rounded-xl border border-silver/15 bg-white/[0.02] p-4">
-            <p className="text-sm font-medium text-white">
-              Free 30-minute consultation
-            </p>
-            <p className="mt-1 text-xs leading-relaxed text-mute">
-              No obligation. We&apos;ll review your matter and outline a clear path
-              forward.
-            </p>
+            <p className="text-sm font-medium text-white">{t.booking.freeTitle}</p>
+            <p className="mt-1 text-xs leading-relaxed text-mute">{t.booking.freeDesc}</p>
           </div>
         </div>
       </aside>
@@ -460,7 +474,17 @@ function Field({
   );
 }
 
-function Confirmation({ booking }: { booking: Booking }) {
+function Confirmation({
+  booking,
+  t,
+  locale,
+  typeLabel,
+}: {
+  booking: Booking;
+  t: Dict;
+  locale: string;
+  typeLabel: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.97 }}
@@ -478,40 +502,42 @@ function Confirmation({ booking }: { booking: Booking }) {
       </motion.div>
 
       <h2 className="mt-8 font-serif text-3xl font-medium text-white sm:text-4xl">
-        Your consultation is booked
+        {t.booking.confTitle}
       </h2>
       <p className="mt-4 text-mute">
-        Thank you, {booking.name.split(" ")[0]}. A confirmation has been recorded
-        and our team will reach out to {booking.email} to confirm the details.
+        {fmt(t.booking.confThanks, {
+          name: booking.name.split(" ")[0],
+          email: booking.email,
+        })}
       </p>
 
       <div className="surface mt-8 rounded-2xl p-6 text-left">
         <dl className="space-y-4 text-sm">
-          <SummaryRow label="Rättsområde" value={booking.serviceArea} />
-          <SummaryRow label="Format" value={booking.consultationType} />
+          <SummaryRow label={t.booking.fmtService} value={booking.serviceArea} />
+          <SummaryRow label={t.booking.fmtFormat} value={typeLabel} />
           <SummaryRow
-            label="Date"
-            value={formatLongDate(booking.date)}
+            label={t.booking.fmtDate}
+            value={formatLongDate(booking.date, locale)}
             icon={CalendarIcon}
           />
-          <SummaryRow label="Time" value={booking.time} icon={Clock} />
-          {booking.consultationType === "Personal Meeting" && (
+          <SummaryRow label={t.booking.fmtTime} value={booking.time} icon={Clock} />
+          {booking.consultationType === "personal" && (
             <SummaryRow
-              label="Location"
-              value="123 Liberty Avenue, NY"
+              label={t.booking.location}
+              value={`${site.address.line1}, ${site.address.line2}`}
               icon={MapPin}
             />
           )}
         </dl>
         <p className="mt-5 border-t border-steel/60 pt-4 text-xs text-mute/70">
-          Reference: {booking.id}
+          {t.booking.reference}: {booking.id}
         </p>
       </div>
 
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <Button href="/">Return Home</Button>
+        <Button href="/">{t.booking.returnHome}</Button>
         <Button href="/services" variant="secondary">
-          Explore Services
+          {t.booking.exploreServices}
         </Button>
       </div>
     </motion.div>

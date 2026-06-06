@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SkipLink } from "@/components/SkipLink";
 import { site } from "@/lib/site";
 
 const inter = Inter({
@@ -77,23 +79,20 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang="sv" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="flex min-h-screen flex-col bg-ink antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-silver focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink"
-        >
-          Skip to content
-        </a>
-        <Navbar />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <LanguageProvider>
+          <SkipLink />
+          <Navbar />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

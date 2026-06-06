@@ -3,17 +3,13 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { useT } from "@/lib/i18n";
 
 /**
  * Calendar — lightweight month-grid date picker with no external dependencies.
  * Disables past dates and weekends (demo availability). Emits ISO yyyy-mm-dd.
+ * Month names and weekday labels come from the active language.
  */
-
-const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-];
 
 function toISO(d: Date): string {
   const y = d.getFullYear();
@@ -29,6 +25,10 @@ export function Calendar({
   value: string | null;
   onChange: (iso: string) => void;
 }) {
+  const t = useT();
+  const MONTHS = t.calendar.months;
+  const WEEKDAYS = t.calendar.weekdays;
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -59,18 +59,18 @@ export function Calendar({
           type="button"
           onClick={() => canGoPrev && setView(new Date(year, month - 1, 1))}
           disabled={!canGoPrev}
-          aria-label="Previous month"
+          aria-label={t.a11y.prevMonth}
           className="flex h-9 w-9 items-center justify-center rounded-full text-mute transition-colors hover:bg-white/[0.05] hover:text-white disabled:opacity-30 disabled:hover:bg-transparent"
         >
           <ChevronLeft size={18} />
         </button>
-        <span className="font-serif text-lg font-medium text-white">
+        <span className="font-serif text-lg font-medium capitalize text-white">
           {MONTHS[month]} {year}
         </span>
         <button
           type="button"
           onClick={() => setView(new Date(year, month + 1, 1))}
-          aria-label="Next month"
+          aria-label={t.a11y.nextMonth}
           className="flex h-9 w-9 items-center justify-center rounded-full text-mute transition-colors hover:bg-white/[0.05] hover:text-white"
         >
           <ChevronRight size={18} />
@@ -78,8 +78,8 @@ export function Calendar({
       </div>
 
       <div className="grid grid-cols-7 gap-1 text-center">
-        {WEEKDAYS.map((w) => (
-          <div key={w} className="py-2 text-xs font-medium text-mute/70">
+        {WEEKDAYS.map((w, i) => (
+          <div key={i} className="py-2 text-xs font-medium text-mute/70">
             {w}
           </div>
         ))}
@@ -108,9 +108,7 @@ export function Calendar({
           );
         })}
       </div>
-      <p className="mt-4 text-xs text-mute/70">
-        Weekdays only. All times shown in your local timezone.
-      </p>
+      <p className="mt-4 text-xs text-mute/70">{t.calendar.note}</p>
     </div>
   );
 }
