@@ -31,8 +31,8 @@ export function AboutView() {
           <Reveal delay={0.1} className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-silver/10">
               <Image
-                src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1000&q=80"
-                alt=""
+                src="/gabriella-levin.jpg"
+                alt="Gabriella Levin"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

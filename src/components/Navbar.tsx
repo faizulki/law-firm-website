@@ -26,7 +26,7 @@ function LanguageToggle({ className }: { className?: string }) {
         aria-label={t.a11y.switchToSv}
         className={cn(
           "px-3 py-1 font-medium transition-colors",
-          lang === "sv" ? "bg-silver text-ink" : "text-mute hover:text-white"
+          lang === "sv" ? "bg-bronze text-ink" : "text-bronze/60 hover:text-bronze"
         )}
       >
         SV
@@ -38,7 +38,7 @@ function LanguageToggle({ className }: { className?: string }) {
         aria-label={t.a11y.switchToEn}
         className={cn(
           "px-3 py-1 font-medium transition-colors",
-          lang === "en" ? "bg-silver text-ink" : "text-mute hover:text-white"
+          lang === "en" ? "bg-bronze text-ink" : "text-bronze/60 hover:text-bronze"
         )}
       >
         EN
@@ -98,14 +98,14 @@ export function Navbar() {
               href={item.href}
               className={cn(
                 "relative px-3 py-2 text-sm transition-colors duration-300",
-                isActive(item.href) ? "text-white" : "text-mute hover:text-white"
+                isActive(item.href) ? "text-bronze" : "text-bronze/60 hover:text-bronze"
               )}
             >
               {item.label}
               {isActive(item.href) && (
                 <motion.span
                   layoutId="nav-underline"
-                  className="absolute inset-x-3 -bottom-px h-px bg-silver"
+                  className="absolute inset-x-3 -bottom-px h-px bg-bronze"
                 />
               )}
             </Link>
@@ -126,7 +126,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
             aria-expanded={open}
-            className="text-white"
+            className="text-bronze"
           >
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -151,8 +151,8 @@ export function Navbar() {
                   className={cn(
                     "rounded-lg px-4 py-3 text-base transition-colors",
                     isActive(item.href)
-                      ? "bg-white/[0.05] text-white"
-                      : "text-mute hover:text-white"
+                      ? "bg-bronze/[0.08] text-bronze"
+                      : "text-bronze/60 hover:text-bronze"
                   )}
                 >
                   {item.label}

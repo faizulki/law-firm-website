@@ -19,10 +19,10 @@ export function Logo({ className }: { className?: string }) {
         className="h-11 w-11 rounded-md object-contain transition-opacity duration-500 group-hover:opacity-90"
       />
       <span className="flex flex-col leading-none">
-        <span className="font-serif text-lg font-semibold tracking-[0.18em] text-white">
+        <span className="font-serif text-lg font-semibold tracking-[0.18em] text-bronze">
           INVICTUS
         </span>
-        <span className="text-[0.6rem] font-medium tracking-[0.42em] text-silver/70">
+        <span className="text-[0.6rem] font-medium tracking-[0.42em] text-bronze/70">
           LAW
         </span>
       </span>
