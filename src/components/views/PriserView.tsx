@@ -15,12 +15,12 @@ export function PriserView() {
       <Section>
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <div className="surface flex flex-col items-start gap-2 rounded-2xl p-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="surface flex flex-col items-start gap-4 rounded-2xl p-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
               <div>
-                <p className="eyebrow text-xs font-medium text-silver/80">
+                <h2 className="font-serif text-2xl font-medium leading-tight text-white sm:text-3xl">
                   {t.priser.rateEyebrow}
-                </p>
-                <p className="mt-2 text-base text-mute">{t.priser.rateDesc}</p>
+                </h2>
+                <p className="mt-3 text-base text-mute">{t.priser.rateDesc}</p>
               </div>
               <p className="shrink-0 font-serif text-3xl font-semibold text-gradient-silver">
                 {t.priser.rateValue}

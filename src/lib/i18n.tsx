@@ -75,10 +75,32 @@ export const dictionary = {
       eyebrow: "Om oss",
       title: "Vi sätter människan i centrum för juridiken",
       intro:
-        "Vi är specialiserade på juridiken kring personlig assistans, assistansersättning och övrig socialförsäkringsrätt, socialrätt och offentlig rätt.",
-      p1: "Vi är specialiserade på juridiken kring personlig assistans, assistansersättning samt övrig socialförsäkringsrätt, socialrätt och offentlig rätt. Indragningar, minskningar och återkrav av tidigare beviljade myndighetsbeslut är ärenden vi arbetar mycket med. Vi arbetar även med socialrätt i form av beslut om stöd enligt Socialtjänstlagen, SoL.",
-      p2: "Vi har stor vana av att överklaga Försäkringskassans beslut och andra myndighetsbeslut.",
-      p3: "Vi sätter människan i centrum för juridiken och vi finner stor tillfredsställelse i att arbeta med juridiska frågor som berör.",
+        "På Invictus Law är vi stolta över att ha en av branschens mest mångsidiga och erfarna jurister i spetsen. Vår chefsjurist förenar juridisk skärpa med djup medicinsk kompetens och mångårig erfarenhet från både offentlig sektor, privat näringsliv och advokatbyrå.",
+      sections: [
+        {
+          heading: "En gedigen juridisk bakgrund",
+          paragraphs: [
+            "Chefsjuristen är utbildad Master of Laws (LL.M.) från Lunds universitet med en unik specialisering inom medicinalrätt, individuell arbetsrätt, familjerätt och socialrätt. Hennes breda juridiska grund kombineras med en socionomexamen från Malmö universitet – en tvärvetenskaplig profil som präglar hela hennes professionella förhållningssätt.",
+          ],
+        },
+        {
+          heading: "Erfarenhet från hela rättskedjan",
+          paragraphs: [
+            "Hennes resa började långt innan juristexamen – som undersköterska inom Region Skåne och arbetsledare inom assistansbranschen. Den kliniska blicken och omtanken därifrån har följt med henne genom hela karriären.",
+            "Efter en tid som asylhandläggare på Migrationsverket och biträdande jurist på Advokatbyrån Limhamnsjuristen AB, tog karriären fart som bolagsjurist på Care AB. Därefter följde roller som jurist på Västra Hamnens Juristbyrå, IT-ansvarig och chefsjurist på Juristbyrån Dockan AB – för att sedan leda den juridiska verksamheten som Chefsjurist på Invictus Law sedan maj 2024.",
+          ],
+        },
+        {
+          heading: "Så här hjälper hon dig",
+          paragraphs: [
+            "Med över ett decennium av juridisk erfarenhet – plus en bakgrund inom vård och socialt arbete – förstår vår chefsjurist människan bakom varje ärende. Oavsett om du behöver hjälp med medicinalrättsliga frågor, arbetsrättsliga tvister, familjerättsliga frågor eller socialrättsliga utmaningar, får du en rådgivare som ser hela din situation.",
+          ],
+        },
+      ],
+      quote:
+        "Juridik ska vara begriplig, tillgänglig och göra skillnad – inte skapa fler problem.",
+      closing:
+        "Vill du veta mer om hur just din fråga kan hanteras? Kontakta oss så berättar vi mer.",
       ledordEyebrow: "Våra ledord",
       ledordQuote: "Våra ledord är kvalitet, personligt engagemang och trygghet.",
       ledord: ["Kvalitet", "Personligt engagemang", "Trygghet"],
@@ -98,12 +120,12 @@ export const dictionary = {
       eyebrow: "Priser",
       title: "Vad kostar juridisk rådgivning hos Juridisk Assistans?",
       intro: "Kostnadshjälp vid juridisk rådgivning.",
-      rateEyebrow: "Rättshjälpstaxan 2023",
+      rateEyebrow: "Rättshjälpstaxa 2026",
       rateDesc:
         "Juridisk Assistans följer den av staten fastställda rättshjälpstaxan som ändras varje år.",
-      rateValue: "1 845 kr",
+      rateValue: "2 032 kr",
       perHour: "/ timme",
-      lead: "Juridisk Assistans följer den av staten fastställda rättshjälpstaxan som ändras varje år. För år 2023 är den 1 845 kr per timme.",
+      lead: "Juridisk Assistans följer den av staten fastställda rättshjälpstaxan som ändras varje år. För år 2026 är den 2 032 kr per timme.",
       paragraphs: [
         "För företag har vi individuell prissättning beroende på omfattningen av uppdraget.",
         "När vi tar uppdrag som offentligt biträde i LVU och LVM är det kostnadsfritt för dig som behöver vår hjälp. Du som befinner dig i en LVU-process har rätt till ett offentligt biträde som ska bistå med juridisk hjälp och domstolen betalar den kostnad som uppstår för det offentliga biträdet.",
@@ -362,10 +384,32 @@ export const dictionary = {
       eyebrow: "About Us",
       title: "We put people at the centre of the law",
       intro:
-        "We specialize in the law surrounding personal assistance, assistance compensation, and other social insurance law, social law, and public law.",
-      p1: "We specialize in the law surrounding personal assistance, assistance compensation, and other social insurance law, social law, and public law. Withdrawals, reductions, and repayment claims relating to previously granted authority decisions are matters we work with extensively. We also handle social law in the form of support decisions under the Social Services Act (SoL).",
-      p2: "We have extensive experience appealing decisions from Försäkringskassan (the Swedish Social Insurance Agency) and other authorities.",
-      p3: "We put people at the centre of the law, and we find great satisfaction in working with legal matters that truly matter.",
+        "At Invictus Law we are proud to be led by one of the industry's most versatile and experienced lawyers. Our Chief Legal Counsel combines legal sharpness with deep medical expertise and many years of experience across the public sector, private business, and law firm practice.",
+      sections: [
+        {
+          heading: "A solid legal foundation",
+          paragraphs: [
+            "Our Chief Legal Counsel holds a Master of Laws (LL.M.) from Lund University with a distinctive specialisation in medical law, individual employment law, family law, and social law. Her broad legal grounding is combined with a Bachelor of Social Work from Malmö University — an interdisciplinary profile that shapes her entire professional approach.",
+          ],
+        },
+        {
+          heading: "Experience across the full legal chain",
+          paragraphs: [
+            "Her journey began long before law school — as an assistant nurse with Region Skåne and a team leader in the personal-assistance industry. The clinical insight and care from that time have stayed with her throughout her career.",
+            "After serving as an asylum case officer at the Swedish Migration Agency and as an associate lawyer at Advokatbyrån Limhamnsjuristen AB, her career took off as in-house counsel at Care AB. She then held roles as a lawyer at Västra Hamnens Juristbyrå, and as IT lead and Chief Legal Counsel at Juristbyrån Dockan AB — before leading the legal practice as Chief Legal Counsel at Invictus Law from May 2024.",
+          ],
+        },
+        {
+          heading: "How she helps you",
+          paragraphs: [
+            "With more than a decade of legal experience — plus a background in healthcare and social work — our Chief Legal Counsel understands the person behind every matter. Whether you need help with medical-law questions, employment disputes, family-law issues, or social-law challenges, you get an advisor who sees the whole picture.",
+          ],
+        },
+      ],
+      quote:
+        "The law should be understandable, accessible, and make a difference — not create more problems.",
+      closing:
+        "Want to know more about how your particular matter can be handled? Get in touch and we'll tell you more.",
       ledordEyebrow: "Our values",
       ledordQuote: "Our guiding values are quality, personal commitment, and security.",
       ledord: ["Quality", "Personal commitment", "Security"],
@@ -385,12 +429,12 @@ export const dictionary = {
       eyebrow: "Pricing",
       title: "What does legal advice cost at Juridisk Assistans?",
       intro: "Help with costs for legal advice.",
-      rateEyebrow: "Legal aid rate 2023",
+      rateEyebrow: "Legal aid rate 2026",
       rateDesc:
         "Juridisk Assistans follows the state-established legal aid rate, which changes every year.",
-      rateValue: "1 845 kr",
+      rateValue: "2 032 kr",
       perHour: "/ hour",
-      lead: "Juridisk Assistans follows the state-established legal aid rate, which changes every year. For 2023 it is SEK 1,845 per hour.",
+      lead: "Juridisk Assistans follows the state-established legal aid rate, which changes every year. For 2026 it is SEK 2,032 per hour.",
       paragraphs: [
         "For companies we offer individual pricing depending on the scope of the matter.",
         "When we act as public counsel in LVU and LVM cases, it is free of charge for you who need our help. If you are in an LVU process, you are entitled to public counsel to assist with legal help, and the court pays the cost that arises for the public counsel.",

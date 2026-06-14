@@ -6,6 +6,7 @@
 
 import {
   FileText,
+  Globe,
   HeartHandshake,
   ShieldCheck,
   Scale,
@@ -20,7 +21,12 @@ export function pick(value: L, lang: Lang): string {
   return value[lang];
 }
 
-export type ServiceSection = { heading: L; paragraphs: L[] };
+export type ServiceSection = {
+  heading: L;
+  paragraphs: L[];
+  bullets?: L[];
+  closing?: L;
+};
 
 export type PracticeArea = {
   slug: string;
@@ -149,6 +155,63 @@ export const practiceAreas: PracticeArea[] = [
             en: "We are experts in social law. We have long experience of matters concerning support under SoL and LSS from the social services — for example housing with special service, escort service, contact person, short-term stays, relief service, home care, service housing, and elderly care.",
           },
         ],
+      },
+    ],
+  },
+  {
+    slug: "migrationsratt",
+    icon: Globe,
+    title: { sv: "Migrationsrätt", en: "Migration Law" },
+    short: {
+      sv: "Trygg vägledning vid asyl, uppehållstillstånd, medborgarskap och överklaganden av Migrationsverkets beslut.",
+      en: "Confident guidance with asylum, residence permits, citizenship, and appeals of Migration Agency decisions.",
+    },
+    sections: [
+      {
+        heading: {
+          sv: "Migrationsrätt – trygg vägledning i en komplex process",
+          en: "Migration law — confident guidance through a complex process",
+        },
+        paragraphs: [
+          {
+            sv: "Oavsett om du ska ansöka om asyl, uppehållstillstånd, medborgarskap eller överklaga ett beslut – migrationsrätt är ett område där insatserna ofta är livsavgörande. På Invictus Law hjälper vi dig att navigera genom regelverken med tydlighet, noggrannhet och mänsklig lyhördhet.",
+            en: "Whether you are applying for asylum, a residence permit, or citizenship — or appealing a decision — migration law is an area where the stakes are often life-defining. At Invictus Law we help you navigate the rules with clarity, precision, and human sensitivity.",
+          },
+          {
+            sv: "Vår chefsjurist har tidigare arbetat som asylhandläggare på Migrationsverket och besitter därför en unik insyn i myndighetens arbetssätt, utredningsmetodik och beslutsprocesser. Den erfarenheten gör att vi kan bygga starkare och mer träffsäkra ärenden – från första ansökan till ett eventuellt överklagande i migrationsdomstol.",
+            en: "Our Chief Legal Counsel previously worked as an asylum case officer at the Swedish Migration Agency, giving her unique insight into the agency's working methods, investigative approach, and decision-making processes. That experience lets us build stronger, more precise cases — from the initial application to any appeal in the migration court.",
+          },
+          {
+            sv: "Vi hjälper dig med:",
+            en: "We help you with:",
+          },
+        ],
+        bullets: [
+          {
+            sv: "Asylansökningar och flyktingstatus",
+            en: "Asylum applications and refugee status",
+          },
+          {
+            sv: "Uppehållstillstånd (arbete, studier, anknytning)",
+            en: "Residence permits (work, study, family ties)",
+          },
+          {
+            sv: "Medborgarskapsfrågor",
+            en: "Citizenship matters",
+          },
+          {
+            sv: "Överklaganden av Migrationsverkets beslut",
+            en: "Appeals of Migration Agency decisions",
+          },
+          {
+            sv: "Frågor om verkställighetshinder och verkställighetsförläggning",
+            en: "Impediments to enforcement and reception placement",
+          },
+        ],
+        closing: {
+          sv: "Du ska inte behöva känna dig ensam i kontakten med myndigheterna. Vi ser till att din röst blir hörd och din sak ordentligt utredd.",
+          en: "You shouldn't have to face the authorities alone. We make sure your voice is heard and your matter properly investigated.",
+        },
       },
     ],
   },

@@ -11,7 +11,7 @@ export function Logo({ className }: { className?: string }) {
       className={`group inline-flex items-center gap-3 ${className ?? ""}`}
     >
       <Image
-        src="/logo.png"
+        src="/logo-bronze.png"
         alt=""
         width={48}
         height={48}

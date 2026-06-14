@@ -62,6 +62,24 @@ export function ServicesView() {
                         <p key={pi}>{pick(p, lang)}</p>
                       ))}
                     </div>
+                    {section.bullets && section.bullets.length > 0 && (
+                      <ul className="mt-5 space-y-2 text-base leading-relaxed text-mute">
+                        {section.bullets.map((b, bi) => (
+                          <li key={bi} className="flex gap-3">
+                            <span
+                              aria-hidden="true"
+                              className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-bronze"
+                            />
+                            <span>{pick(b, lang)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {section.closing && (
+                      <p className="mt-5 text-base leading-relaxed text-mute">
+                        {pick(section.closing, lang)}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

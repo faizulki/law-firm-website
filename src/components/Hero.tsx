@@ -22,13 +22,13 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-40"
+          className="object-cover object-center opacity-70"
         />
-        {/* Gradient veils for depth + legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/85 to-ink" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent" />
+        {/* Gradient veils for depth + legibility — kept lighter on the right so the statue stays visible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/70 to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/55 to-transparent" />
         {/* Subtle radial vignette */}
-        <div className="absolute inset-0 [background:radial-gradient(120%_120%_at_50%_0%,transparent_40%,rgba(10,10,10,0.85)_100%)]" />
+        <div className="absolute inset-0 [background:radial-gradient(120%_120%_at_50%_0%,transparent_45%,rgba(10,10,10,0.75)_100%)]" />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-6 pt-28 lg:px-8">

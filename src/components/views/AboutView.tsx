@@ -16,20 +16,46 @@ export function AboutView() {
       <PageHeader eyebrow={t.about.eyebrow} title={t.about.title} intro={t.about.intro} />
 
       <Section>
-        <div className="grid items-center gap-14 lg:grid-cols-2">
+        <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <Reveal>
-            <div className="space-y-5 text-base leading-relaxed text-mute">
-              <p>{t.about.p1}</p>
-              <p>{t.about.p2}</p>
-              <p>{t.about.p3}</p>
-            </div>
-            <div className="mt-8">
-              <Button href="/consultation">{t.common.bookConsultation}</Button>
+            <div className="space-y-10">
+              {t.about.sections.map((s, i) => (
+                <div key={i}>
+                  <h2 className="font-serif text-2xl font-medium leading-snug text-white sm:text-3xl">
+                    {s.heading}
+                  </h2>
+                  <div className="mt-4 space-y-4 text-base leading-relaxed text-mute">
+                    {s.paragraphs.map((p, pi) => (
+                      <p key={pi}>{p}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              <blockquote className="surface relative rounded-2xl p-7 sm:p-8">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-5 top-2 font-serif text-5xl leading-none text-bronze/40"
+                >
+                  &ldquo;
+                </span>
+                <p className="font-serif text-xl italic leading-snug text-white sm:text-2xl">
+                  {t.about.quote}
+                </p>
+              </blockquote>
+
+              <p className="text-base leading-relaxed text-mute">
+                {t.about.closing}
+              </p>
+
+              <div>
+                <Button href="/consultation">{t.common.bookConsultation}</Button>
+              </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.1} className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-silver/10">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-silver/10 lg:sticky lg:top-28">
               <Image
                 src="/gabriella-levin.jpg"
                 alt="Gabriella Levin"
