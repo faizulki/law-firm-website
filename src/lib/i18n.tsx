@@ -80,7 +80,7 @@ export const dictionary = {
         {
           heading: "En gedigen juridisk bakgrund",
           paragraphs: [
-            "Chefsjuristen är utbildad Master of Laws (LL.M.) från Lunds universitet med en unik specialisering inom medicinalrätt, individuell arbetsrätt, familjerätt och socialrätt. Hennes breda juridiska grund kombineras med en socionomexamen från Malmö universitet – en tvärvetenskaplig profil som präglar hela hennes professionella förhållningssätt.",
+            "Chefsjuristen, Gabriella Levin, är utbildad och har en Master of Laws (LL.M.) från Lunds universitet med en unik specialisering inom medicinalrätt, individuell arbetsrätt, familjerätt och socialrätt. Hennes breda juridiska grund kombineras med en socionomexamen från Malmö universitet – en tvärvetenskaplig profil som präglar hela hennes professionella förhållningssätt.",
           ],
         },
         {
@@ -389,7 +389,7 @@ export const dictionary = {
         {
           heading: "A solid legal foundation",
           paragraphs: [
-            "Our Chief Legal Counsel holds a Master of Laws (LL.M.) from Lund University with a distinctive specialisation in medical law, individual employment law, family law, and social law. Her broad legal grounding is combined with a Bachelor of Social Work from Malmö University — an interdisciplinary profile that shapes her entire professional approach.",
+            "Our Chief Legal Counsel, Gabriella Levin, is a trained lawyer and holds a Master of Laws (LL.M.) from Lund University with a distinctive specialisation in medical law, individual employment law, family law, and social law. Her broad legal grounding is combined with a Bachelor of Social Work from Malmö University — an interdisciplinary profile that shapes her entire professional approach.",
           ],
         },
         {

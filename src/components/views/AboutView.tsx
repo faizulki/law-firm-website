@@ -42,6 +42,12 @@ export function AboutView() {
                 <p className="font-serif text-xl italic leading-snug text-white sm:text-2xl">
                   {t.about.quote}
                 </p>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-0 right-5 font-serif text-5xl leading-none text-bronze/40"
+                >
+                  &rdquo;
+                </span>
               </blockquote>
 
               <p className="text-base leading-relaxed text-mute">
