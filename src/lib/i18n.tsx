@@ -118,14 +118,14 @@ export const dictionary = {
     },
     priser: {
       eyebrow: "Priser",
-      title: "Vad kostar juridisk rådgivning hos Juridisk Assistans?",
+      title: "Vad kostar juridisk rådgivning hos Invictus Law?",
       intro: "Kostnadshjälp vid juridisk rådgivning.",
       rateEyebrow: "Rättshjälpstaxa 2026",
       rateDesc:
-        "Juridisk Assistans följer den av staten fastställda rättshjälpstaxan som ändras varje år.",
+        "Invictus Law följer den av staten fastställda rättshjälpstaxan som ändras varje år.",
       rateValue: "2 032 kr",
       perHour: "/ timme",
-      lead: "Juridisk Assistans följer den av staten fastställda rättshjälpstaxan som ändras varje år. För år 2026 är den 2 032 kr per timme.",
+      lead: "Invictus Law följer den av staten fastställda rättshjälpstaxan som ändras varje år. För år 2026 är den 2 032 kr per timme.",
       paragraphs: [
         "För företag har vi individuell prissättning beroende på omfattningen av uppdraget.",
         "När vi tar uppdrag som offentligt biträde i LVU och LVM är det kostnadsfritt för dig som behöver vår hjälp. Du som befinner dig i en LVU-process har rätt till ett offentligt biträde som ska bistå med juridisk hjälp och domstolen betalar den kostnad som uppstår för det offentliga biträdet.",
@@ -427,14 +427,14 @@ export const dictionary = {
     },
     priser: {
       eyebrow: "Pricing",
-      title: "What does legal advice cost at Juridisk Assistans?",
+      title: "What does legal advice cost at Invictus Law?",
       intro: "Help with costs for legal advice.",
       rateEyebrow: "Legal aid rate 2026",
       rateDesc:
-        "Juridisk Assistans follows the state-established legal aid rate, which changes every year.",
+        "Invictus Law follows the state-established legal aid rate, which changes every year.",
       rateValue: "2 032 kr",
       perHour: "/ hour",
-      lead: "Juridisk Assistans follows the state-established legal aid rate, which changes every year. For 2026 it is SEK 2,032 per hour.",
+      lead: "Invictus Law follows the state-established legal aid rate, which changes every year. For 2026 it is SEK 2,032 per hour.",
       paragraphs: [
         "For companies we offer individual pricing depending on the scope of the matter.",
         "When we act as public counsel in LVU and LVM cases, it is free of charge for you who need our help. If you are in an LVU process, you are entitled to public counsel to assist with legal help, and the court pays the cost that arises for the public counsel.",
