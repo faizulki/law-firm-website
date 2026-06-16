@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "real estate law",
     "litigation",
     "legal counsel",
-    "New York lawyer",
+    "Malmö lawyer",
   ],
   authors: [{ name: site.name }],
   openGraph: {
@@ -69,12 +69,12 @@ export default function RootLayout({
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address.line1,
-      addressLocality: "New York",
-      addressRegion: "NY",
-      postalCode: "10001",
-      addressCountry: "US",
+      addressLocality: "Malmö",
+      addressRegion: "Skåne",
+      postalCode: "211 75",
+      addressCountry: "SE",
     },
-    areaServed: "United States",
+    areaServed: "Sweden",
     priceRange: "$$$",
   };
 

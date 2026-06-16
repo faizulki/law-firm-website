@@ -13,8 +13,8 @@ export const site = {
   phone: "(555) 123-4567",
   phoneHref: "tel:+15551234567",
   address: {
-    line1: "123 Liberty Avenue",
-    line2: "New York, NY 10001",
+    line1: "Einar Hansens Esplanad 33",
+    line2: "211 75 Malmö, Sweden",
   },
   social: {
     linkedin: "https://www.linkedin.com/company/invictus-law",
