@@ -68,7 +68,7 @@ export function ContactView() {
               <div className="relative aspect-[16/10] w-full">
                 <iframe
                   title={t.contact.mapTitle}
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=12.9800%2C55.6080%2C12.9980%2C55.6160&layer=mapnik&marker=55.6118%2C12.9886"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=12.9780%2C55.6125%2C12.9870%2C55.6165&layer=mapnik&marker=55.6143%2C12.9817"
                   className="absolute inset-0 h-full w-full opacity-80 [filter:grayscale(1)_invert(0.92)_contrast(0.9)]"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
