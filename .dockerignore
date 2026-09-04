@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.github
+.vercel
+fix
+*.md
+npm-debug.log*
+.env*

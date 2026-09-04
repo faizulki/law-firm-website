@@ -1,0 +1,6 @@
+# Replace with your real domain(s). Caddy will automatically obtain and
+# renew a Let's Encrypt TLS certificate for it — no extra setup needed,
+# as long as DNS already points at this server and ports 80/443 are open.
+yourdomain.com, www.yourdomain.com {
+    reverse_proxy web:3000
+}

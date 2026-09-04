@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   images: {
     // Stock photography placeholders. Swap these hosts for your CDN later.
     remotePatterns: [
