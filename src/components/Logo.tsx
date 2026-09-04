@@ -13,10 +13,10 @@ export function Logo({ className }: { className?: string }) {
       <Image
         src="/logo-bronze.png"
         alt=""
-        width={48}
-        height={48}
+        width={56}
+        height={56}
         priority
-        className="h-11 w-11 rounded-md object-contain transition-opacity duration-500 group-hover:opacity-90"
+        className="h-14 w-14 object-contain drop-shadow-[0_0_14px_rgba(205,127,50,0.35)] transition-transform duration-500 group-hover:scale-105"
       />
       <span className="flex flex-col leading-none">
         <span className="font-serif text-lg font-semibold tracking-[0.18em] text-bronze">
