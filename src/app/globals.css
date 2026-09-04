@@ -112,6 +112,15 @@ body {
     border-color: rgba(192, 192, 192, 0.32);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   }
+
+  /* Hide scrollbar for horizontally-scrolling strips (quick-nav, etc.) */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Respect reduced motion globally */

@@ -20,12 +20,12 @@ export function ServicesView() {
 
       {/* Quick nav */}
       <div className="sticky top-20 z-30 border-b border-steel/40 bg-ink/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap gap-2 px-6 py-4 lg:px-8">
+        <div className="no-scrollbar mx-auto flex max-w-7xl flex-nowrap gap-2 overflow-x-auto px-6 py-4 lg:px-8 lg:flex-wrap lg:overflow-visible">
           {practiceAreas.map((area) => (
             <a
               key={area.slug}
               href={`#${area.slug}`}
-              className="rounded-full border border-steel/60 px-4 py-1.5 text-sm text-mute transition-colors hover:border-silver/40 hover:text-white"
+              className="shrink-0 whitespace-nowrap rounded-full border border-steel/60 px-4 py-1.5 text-sm text-mute transition-colors hover:border-silver/40 hover:text-white"
             >
               {pick(area.title, lang)}
             </a>
