@@ -12,6 +12,9 @@ import {
   Scale,
   Gavel,
   Target,
+  Building2,
+  Stethoscope,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import type { Lang } from "./i18n";
@@ -22,7 +25,7 @@ export function pick(value: L, lang: Lang): string {
 }
 
 export type ServiceSection = {
-  heading: L;
+  heading?: L;
   paragraphs: L[];
   bullets?: L[];
   closing?: L;
@@ -42,117 +45,86 @@ export const practiceAreas: PracticeArea[] = [
     icon: FileText,
     title: { sv: "Serveringstillstånd", en: "Liquor Licensing" },
     short: {
-      sv: "Vi hjälper dig med serveringstillstånd för restaurang och krog — ansökan, tillfälliga tillstånd och överklagande av avslag.",
-      en: "We help you with liquor licenses for restaurants and bars — applications, temporary permits, and appeals against rejections.",
+      sv: "Ansökan, tillsynsärenden och överklaganden av serveringstillstånd för restauranger, hotell och krogar.",
+      en: "Applications, supervisory matters, and appeals for liquor licenses for restaurants, hotels, and bars.",
     },
     sections: [
       {
-        heading: {
-          sv: "Tillstånd och tillståndsärenden",
-          en: "Permits and licensing matters",
-        },
         paragraphs: [
           {
-            sv: "Invictuslaw juristbyrå finns här som din jurist för serveringstillstånd. Serveringstillstånd omfattar all slags överlämning av alkoholhaltiga drycker i utbyte mot betalning eller annan ersättning. För att få ett tillstånd måste du anses vara lämplig för att servera alkohol, sköta din ekonomi och inte ha ett brottsligt förflutet. Du måste även genomföra och klara ett kunskapsprov gällande alkohollagen. Det kan vara svårt att veta hur du ska gå vidare med serveringstillståndet. På Advantage har vi en bred kompetens och lång erfarenhet av serveringstillståndsärenden.",
-            en: "Invictuslaw is here as your lawyer for liquor licensing. A serving permit covers any handover of alcoholic beverages in exchange for payment or other compensation. To obtain a permit you must be considered suitable to serve alcohol, manage your finances, and have no criminal record. You must also take and pass a knowledge test on the Alcohol Act. It can be hard to know how to proceed with a serving permit. At our firm we have broad expertise and long experience of liquor licensing matters.",
-          },
-        ],
-      },
-      {
-        heading: {
-          sv: "Serveringstillstånd för restaurang och krog",
-          en: "Liquor licenses for restaurants and bars",
-        },
-        paragraphs: [
-          {
-            sv: "Våra advokater och jurister vet hur restaurang- och krogbranschen fungerar och har flera års erfarenhet av frågor som rör serveringstillstånd i restaurang och krog. Flera av våra kunder är idag verksamma inom både restaurang- och krogbranschen, det ger oss en unik inblick i de olika tillstånd som ges av myndigheter för både serveringen och alkohol. Vi hjälper dig kontakta myndigheterna och hantera ditt ärende på bästa sätt!",
-            en: "Our attorneys and lawyers know how the restaurant and bar industry works and have several years of experience with matters concerning serving permits for restaurants and bars. Several of our clients are active in the restaurant and bar industry today, which gives us a unique insight into the various permits issued by authorities for both service and alcohol. We help you contact the authorities and handle your matter in the best way!",
+            sv: "Att ansöka om eller behålla ett serveringstillstånd kräver djupgående kunskap om alkohollagen och lokala riktlinjer. Processen är ofta rigorös med höga krav på personlig och ekonomisk lämplighet samt strikta vandelsprövningar. Invictus Law biträder restauranger, hotell och andra aktörer genom hela processen – från den initiala ansökan och dialogen med kommunen till strategisk rådgivning vid tillsynsärenden, varningar eller hot om återkallelse. Med vår expertis minimerar vi riskerna och maximerar era chanser till ett positivt beslut.",
+            en: "Applying for or retaining a liquor license requires in-depth knowledge of the Alcohol Act and local guidelines. The process is often rigorous, with high demands on personal and financial suitability and strict conduct assessments. Invictus Law assists restaurants, hotels, and other operators through the entire process — from the initial application and dialogue with the municipality to strategic advice during supervisory matters, warnings, or threats of revocation. With our expertise, we minimise the risks and maximise your chances of a favourable decision.",
           },
           {
-            sv: "Vi arbetar med tillfälliga- som permanenta tillstånd. Vi har även vanan att söka tillstånd för dig som ska arbeta med ett tillfälligt event där serverings- och danstillstånd behövs.",
-            en: "We work with both temporary and permanent permits. We are also accustomed to applying for permits for you who will be running a temporary event where serving and dance permits are required.",
-          },
-        ],
-      },
-      {
-        heading: {
-          sv: "Avslag på tillstånd och tillståndsärenden",
-          en: "Rejected permits and appeals",
-        },
-        paragraphs: [
-          {
-            sv: "Om du har fått avslag på din ansökan eller fått ett myndighetsbeslut som du inte är nöjd med kan vi hjälpa dig överklaga det. Vi hjälper dig med en analys av varför myndigheten fattat ett avslagsbeslut och därefter i samråd med dig överklagar vi beslutet.",
-            en: "If your application has been rejected, or you have received an authority decision you are not satisfied with, we can help you appeal it. We help you analyse why the authority issued a rejection and then, in consultation with you, we appeal the decision.",
-          },
-          {
-            sv: "Om du har frågor eller har fått problem med ditt serveringstillstånd kan vi hjälpa dig. Tveka inte att höra av dig för mer information.",
-            en: "If you have questions or have run into problems with your serving permit, we can help. Don't hesitate to get in touch for more information.",
+            sv: "Flera av våra kunder är idag verksamma inom både restaurang- och krogbranschen, det ger oss en unik inblick i de olika tillstånd som ges av myndigheter för både serveringen och alkohol.",
+            en: "Several of our clients are today active in both the restaurant and bar industry, which gives us a unique insight into the various permits issued by authorities for both service and alcohol.",
           },
         ],
       },
     ],
   },
   {
-    slug: "personlig-assistans",
-    icon: HeartHandshake,
-    title: { sv: "Personlig assistans", en: "Personal Assistance" },
-    short: {
-      sv: "Spetskompetens inom personlig assistans och assistansersättning — ansökan, kommunicering och överklagande.",
-      en: "Specialist expertise in personal assistance and assistance compensation — applications, responses, and appeals.",
-    },
-    sections: [
-      {
-        heading: {
-          sv: "Assistansersättning och personlig assistans",
-          en: "Assistance compensation and personal assistance",
-        },
-        paragraphs: [
-          {
-            sv: "Vi har spetskompetens inom personlig assistans och assistansersättning och hjälper till att ansöka, svara på kommuniceringar och överklaga beslut om personlig assistans eller assistansersättning. Vi ger vi även rådgivning och biträde gällande andra områden inom assistansbranschen. Juridisk Assistans biträder såväl assistansbolag som privatpersoner i frågor om personlig assistans.",
-            en: "We have specialist expertise in personal assistance and assistance compensation, and we help with applications, responses to authority communications, and appeals of decisions on personal assistance or assistance compensation. We also provide advice and representation in other areas of the assistance sector. Juridisk Assistans represents both assistance companies and private individuals in matters of personal assistance.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "socialforsakringsratt",
+    slug: "personlig-assistans-socialforsakringsratt",
     icon: ShieldCheck,
-    title: { sv: "Socialförsäkringsrätt", en: "Social Insurance Law" },
+    title: {
+      sv: "Personlig assistans (LSS) och Socialförsäkringsrätt",
+      en: "Personal Assistance (LSS) and Social Insurance Law",
+    },
     short: {
-      sv: "Sjukpenning, sjukersättning, omvårdnadsbidrag, livränta och återkrav — vi kan juridiken kring Försäkringskassans beslut.",
-      en: "Sickness benefit, activity compensation, care allowance, annuity, and repayment claims — we know the law around the Social Insurance Agency's decisions.",
+      sv: "Kvalificerad rådgivning kring LSS-insatser och socialförsäkringsförmåner för både privatpersoner och assistansanordnare.",
+      en: "Qualified advice on LSS support and social insurance benefits for both private individuals and assistance providers.",
     },
     sections: [
       {
-        heading: {
-          sv: "Beslut från Försäkringskassan",
-          en: "Decisions from the Social Insurance Agency",
-        },
         paragraphs: [
           {
-            sv: "Utöver assistansersättning hjälper vi dig även med juridiken inom annan socialförsäkringsrätt så som sjukpenning, sjukersättning, omvårdnadsbidrag och merkostnadsersättning, underhållsstöd, barnbidrag, bostadsbidrag, livränta och återkrav. Vi har mångårig erfarenhet från Försäkringskassan och är väl insatta i hur den arbetar samt juridiken kring myndighetens beslut.",
-            en: "In addition to assistance compensation, we also help you with the law in other areas of social insurance, such as sickness benefit, activity/sickness compensation, care allowance and additional-cost compensation, maintenance support, child allowance, housing allowance, annuity, and repayment claims. We have many years of experience with Försäkringskassan and are well versed in how it works and the law surrounding its decisions.",
+            sv: "Rätten till personlig assistans och andra socialförsäkringsförmåner är avgörande för individens livskvalitet, men regelverket kring LSS och Försäkringskassan är snårigt och i ständig förändring. Vi erbjuder kvalificerad juridisk rådgivning och praktiskt stöd för både enskilda individer och assistansanordnare.",
+            en: "The right to personal assistance and other social insurance benefits is decisive for an individual's quality of life, but the regulatory framework surrounding LSS and Försäkringskassan is intricate and constantly changing. We offer qualified legal advice and practical support for both private individuals and assistance providers.",
+          },
+          {
+            sv: "Vår chefsjurist har en bakgrund som bolagsjurist på ett större LSS-bolag, vilket ger oss en unik insyn i branschens utmaningar. Vi hjälper er med allt från nyansökningar och omprövningar till att driva processer mot myndigheter när rättmätiga insatser har nekats.",
+            en: "Our Chief Legal Counsel has a background as in-house counsel at a major LSS company, giving us unique insight into the industry's challenges. We help you with everything from new applications and reassessments to pursuing proceedings against authorities when rightful support has been denied.",
           },
         ],
       },
     ],
   },
   {
-    slug: "socialratt-sol-lss",
+    slug: "socialratt",
     icon: Scale,
-    title: { sv: "Socialrätt, SoL & LSS", en: "Social Law, SoL & LSS" },
+    title: { sv: "Socialrätt", en: "Social Law" },
     short: {
-      sv: "Insatser enligt SoL och LSS — boende med särskild service, ledsagare, kontaktperson, hemtjänst och mer.",
-      en: "Support under SoL and LSS — housing with special service, escort, contact person, home care, and more.",
+      sv: "Engagerat stöd i socialrättsliga tvångsvårdsmål som LVU, LVM och LPT — som offentligt biträde eller privat ombud.",
+      en: "Dedicated support in social-law compulsory care cases such as LVU, LVM, and LPT — as public counsel or private representative.",
     },
     sections: [
       {
-        heading: { sv: "Socialrätt, SoL och LSS", en: "Social law, SoL and LSS" },
         paragraphs: [
           {
-            sv: "Vi är experter på socialrätt. Vi har lång erfarenhet av ärenden gällande insatser med stöd av SoL och LSS från socialtjänsten till exempel bostad med särskild service, ledsagare, kontaktperson, korttidsvistelse, avlösarservice, hemtjänst, serviceboende och äldreboende.",
-            en: "We are experts in social law. We have long experience of matters concerning support under SoL and LSS from the social services — for example housing with special service, escort service, contact person, short-term stays, relief service, home care, service housing, and elderly care.",
+            sv: "Socialrätten rymmer komplexa frågor som rör individens skydd och rättigheter i samhället, inklusive tvångsvårdsmål såsom LVU, LVM och LPT. Invictus Law har spetskompetens inom socialrätt och erbjuder ett engagerat och juridiskt skarpt stöd i situationer som ofta är både akuta och känslomässigt påfrestande. Vi agerar som offentligt biträde eller privat ombud och kämpar för att säkerställa att myndigheternas handläggning sker rättssäkert och att individens röst blir hörd i domstol.",
+            en: "Social law encompasses complex issues concerning an individual's protection and rights in society, including compulsory care cases such as LVU, LVM, and LPT. Invictus Law has specialist expertise in social law and offers dedicated, legally sharp support in situations that are often both urgent and emotionally demanding. We act as public counsel or private representative and fight to ensure that authorities' handling is legally sound and that the individual's voice is heard in court.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "tillstandsarenden-lss-hvb",
+    icon: Building2,
+    title: {
+      sv: "Tillståndsärenden: Starta LSS-bolag, LSS-hem och HVB-hem (SoL)",
+      en: "Licensing Matters: Starting LSS Companies, LSS Homes, and HVB Homes (SoL)",
+    },
+    short: {
+      sv: "Vi lotsar er genom IVO:s tillståndsprövning vid start av LSS-bolag, LSS-hem och HVB-hem.",
+      en: "We guide you through IVO's permit review when establishing LSS companies, LSS homes, and HVB homes.",
+    },
+    sections: [
+      {
+        paragraphs: [
+          {
+            sv: "Att etablera och driva verksamhet inom vård och omsorg kräver tillstånd från Inspektionen för vård och omsorg (IVO). Kraven på ägar- och ledningsprövning, ekonomisk stabilitet samt kvalitetssäkring är extremt högt ställda. Tack vare vår chefsjurists gedigna erfarenhet från omsorgsbranschen har Invictus Law den spetskompetens som krävs för att lotsa er genom hela processen. Vi hjälper er att strukturera ansökan, utforma ledningssystem och bemöta IVO:s frågor vid tillståndsprövning för LSS-bolag, LSS-hem, HVB-hem samt andra tillståndspliktiga verksamheter inom ramen för SoL.",
+            en: "Establishing and operating a business within care and social services requires a permit from the Health and Social Care Inspectorate (IVO). The requirements for ownership and management review, financial stability, and quality assurance are set extremely high. Thanks to our Chief Legal Counsel's solid experience from the care industry, Invictus Law has the specialist expertise required to guide you through the entire process. We help you structure the application, design management systems, and respond to IVO's questions during the permit review for LSS companies, LSS homes, HVB homes, and other activities requiring a permit under SoL.",
           },
         ],
       },
@@ -163,76 +135,95 @@ export const practiceAreas: PracticeArea[] = [
     icon: Globe,
     title: { sv: "Migrationsrätt", en: "Migration Law" },
     short: {
-      sv: "Trygg vägledning vid asyl, uppehållstillstånd, medborgarskap och överklaganden av Migrationsverkets beslut.",
-      en: "Confident guidance with asylum, residence permits, citizenship, and appeals of Migration Agency decisions.",
+      sv: "Trygg vägledning genom det nya, strängare regelverket kring uppehållstillstånd, medborgarskap och asyl.",
+      en: "Confident guidance through the new, stricter rules on residence permits, citizenship, and asylum.",
     },
     sections: [
       {
-        heading: {
-          sv: "Migrationsrätt – trygg vägledning i en komplex process",
-          en: "Migration law — confident guidance through a complex process",
-        },
         paragraphs: [
           {
-            sv: "Oavsett om du ska ansöka om asyl, uppehållstillstånd, medborgarskap eller överklaga ett beslut – migrationsrätt är ett område där insatserna ofta är livsavgörande. På Invictus Law hjälper vi dig att navigera genom regelverken med tydlighet, noggrannhet och mänsklig lyhördhet.",
-            en: "Whether you are applying for asylum, a residence permit, or citizenship — or appealing a decision — migration law is an area where the stakes are often life-defining. At Invictus Law we help you navigate the rules with clarity, precision, and human sensitivity.",
+            sv: "Det migrationsrättsliga landskapet är i ständig förändring, vilket har blivit särskilt tydligt under 2026 i och med de omfattande och strikta lagändringar som skett avseende kraven för både permanent uppehållstillstånd och svenskt medborgarskap. Dessa nya regelverk har skapat en stor osäkerhet och innebär skärpta villkor kring bland annat försörjning, vandel och språkkunskaper.",
+            en: "The migration law landscape is constantly changing, which has become especially clear during 2026 with the extensive and strict legislative changes affecting the requirements for both permanent residence permits and Swedish citizenship. These new rules have created considerable uncertainty and mean stricter conditions regarding, among other things, income, conduct, and language proficiency.",
           },
           {
-            sv: "Vår chefsjurist har tidigare arbetat som asylhandläggare på Migrationsverket och besitter därför en unik insyn i myndighetens arbetssätt, utredningsmetodik och beslutsprocesser. Den erfarenheten gör att vi kan bygga starkare och mer träffsäkra ärenden – från första ansökan till ett eventuellt överklagande i migrationsdomstol.",
-            en: "Our Chief Legal Counsel previously worked as an asylum case officer at the Swedish Migration Agency, giving her unique insight into the agency's working methods, investigative approach, and decision-making processes. That experience lets us build stronger, more precise cases — from the initial application to any appeal in the migration court.",
+            sv: "På Invictus Law hjälper vi dig att navigera i detta nya juridiska landskap, tolka hur de senaste lagändringarna påverkar just din situation och strategiskt planera samt anpassa din ansökan för att maximera chanserna till bifall under de nya, strängare förutsättningarna. Det migrationsrättsliga landskapet är strikt och kräver absolut precision i varje moment.",
+            en: "At Invictus Law, we help you navigate this new legal landscape, interpret how the latest legislative changes affect your specific situation, and strategically plan and tailor your application to maximise your chances of approval under the new, stricter conditions. The migration law landscape is strict and demands absolute precision at every step.",
           },
           {
-            sv: "Vi hjälper dig med:",
-            en: "We help you with:",
+            sv: "På Invictus Law biträder vi klienter i ärenden som rör asyl, arbetstillstånd, uppehållstillstånd för egna företagare, familjeåterförening och svenskt medborgarskap och företräder dig i dessa processer.",
+            en: "At Invictus Law, we assist clients in matters concerning asylum, work permits, residence permits for self-employed individuals, family reunification, and Swedish citizenship, and represent you throughout these processes.",
+          },
+          {
+            sv: "Då vår chefsjurist har värdefull erfarenhet av att ha arbetat på Migrationsverket, besitter vi en djupgående förståelse för myndighetens interna beslutsprocesser och bedömningsgrunder. Vi hjälper er att strukturera er ansökan rätt från början eller att driva ert ärende vidare vid ett eventuellt avslag.",
+            en: "As our Chief Legal Counsel has valuable experience working at the Swedish Migration Agency, we have an in-depth understanding of the agency's internal decision-making processes and grounds for assessment. We help you structure your application correctly from the outset, or pursue your case further in the event of a rejection.",
           },
         ],
-        bullets: [
-          {
-            sv: "Asylansökningar och flyktingstatus",
-            en: "Asylum applications and refugee status",
-          },
-          {
-            sv: "Uppehållstillstånd (arbete, studier, anknytning)",
-            en: "Residence permits (work, study, family ties)",
-          },
-          {
-            sv: "Medborgarskapsfrågor",
-            en: "Citizenship matters",
-          },
-          {
-            sv: "Överklaganden av Migrationsverkets beslut",
-            en: "Appeals of Migration Agency decisions",
-          },
-          {
-            sv: "Frågor om verkställighetshinder och verkställighetsförläggning",
-            en: "Impediments to enforcement and reception placement",
-          },
-        ],
-        closing: {
-          sv: "Du ska inte behöva känna dig ensam i kontakten med myndigheterna. Vi ser till att din röst blir hörd och din sak ordentligt utredd.",
-          en: "You shouldn't have to face the authorities alone. We make sure your voice is heard and your matter properly investigated.",
-        },
       },
     ],
   },
   {
-    slug: "overklaga",
+    slug: "forvaltningsratt-overklaga",
     icon: Gavel,
-    title: { sv: "Överklaga myndighetsbeslut", en: "Appealing Authority Decisions" },
+    title: {
+      sv: "Förvaltningsrätt – Överklaga myndighetsbeslut",
+      en: "Administrative Law — Appealing Authority Decisions",
+    },
     short: {
-      sv: "Vi överklagar Försäkringskassans och andra myndigheters beslut — och hjälper dig även vid ansökningar.",
-      en: "We appeal decisions by the Social Insurance Agency and other authorities — and also help with applications.",
+      sv: "Vi granskar och överklagar felaktiga myndighetsbeslut till förvaltningsrätten och kammarrätten.",
+      en: "We review and appeal incorrect authority decisions to the Administrative Court and the Administrative Court of Appeal.",
     },
     sections: [
       {
-        heading: {
-          sv: "Vill du överklaga Försäkringskassans beslut eller ett annat myndighetsbeslut?",
-          en: "Want to appeal a decision from the Social Insurance Agency or another authority?",
-        },
         paragraphs: [
           {
-            sv: "Våra uppdrag handlar huvudsakligen om att överklaga Försäkringskassans beslut eller annat myndighetsbeslut men vi arbetar även med att hjälpa till vid ansökningar. För att du ska få bästa hjälp med ditt ärende kan du ta kontakt med oss som har specialistkompetens inom myndighetsjuridik.",
-            en: "Our work mainly concerns appealing decisions from Försäkringskassan or other authorities, but we also help with applications. For the best help with your matter, get in touch with us — specialists in administrative law.",
+            sv: "När en myndighet fattar ett beslut som går dig eller ditt företag emot, är det avgörande att agera snabbt och juridiskt korrekt. Förvaltningsrätten styr relationen mellan den enskilde och det allmänna. Invictus Law har omfattande erfarenhet av att granska, analysera och överklaga felaktiga myndighetsbeslut till förvaltningsrätten och kammarrätten. Vi formulerar juridiskt slagkraftiga överklaganden och processar för dina rättigheter, oavsett om det handlar om indragna tillstånd, nekat stöd eller andra betungande myndighetsbeslut.",
+            en: "When an authority makes a decision against you or your company, it is crucial to act quickly and in a legally sound manner. Administrative law governs the relationship between the individual and the state. Invictus Law has extensive experience reviewing, analysing, and appealing incorrect authority decisions to the Administrative Court and the Administrative Court of Appeal. We draft legally forceful appeals and litigate for your rights, whether the matter concerns revoked permits, denied support, or other burdensome authority decisions.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "medicinalratt-ivo",
+    icon: Stethoscope,
+    title: { sv: "Medicinalrätt och IVO-anmälningar", en: "Medical Law and IVO Reports" },
+    short: {
+      sv: "Spetskompetens inom medicinalrätt — tillsynsärenden, IVO-anmälningar och processer i HSAN.",
+      en: "Specialist expertise in medical law — supervisory matters, IVO reports, and proceedings before HSAN.",
+    },
+    sections: [
+      {
+        paragraphs: [
+          {
+            sv: "Medicinalrätten är ett högspecialiserat område där hälso- och sjukvårdens regelverk möter juridiken. Vår chefsjurist har förvärvat spetskompetens inom detta fält genom tidigare arbete på en större, välrenommerad advokatbyrå med just denna inriktning. Vi biträder vårdgivare, legitimerad hälso- och sjukvårdspersonal samt enskilda patienter.",
+            en: "Medical law is a highly specialised field where healthcare regulations meet the law. Our Chief Legal Counsel has acquired specialist expertise in this field through previous work at a large, well-reputed law firm with exactly this focus. We assist healthcare providers, licensed healthcare professionals, and individual patients.",
+          },
+          {
+            sv: "Vi erbjuder expertis vid tillsynsärenden, anmärkningar och anmälningar till Inspektionen för vård och omsorg (IVO), samt vid processer i Hälso- och sjukvårdens ansvarsnämnd (HSAN) gällande legitimationsfrågor.",
+            en: "We offer expertise in supervisory matters, remarks, and reports to the Health and Social Care Inspectorate (IVO), as well as in proceedings before the Medical Responsibility Board (HSAN) concerning matters of professional licensing.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "familjeratt",
+    icon: Users,
+    title: { sv: "Familjerätt", en: "Family Law" },
+    short: {
+      sv: "Strategisk och mänsklig rådgivning vid skilsmässa, vårdnadstvister och upprättande av familjerättsliga avtal.",
+      en: "Strategic and human advice on divorce, custody disputes, and drafting family-law agreements.",
+    },
+    sections: [
+      {
+        paragraphs: [
+          {
+            sv: "Familjerätten rör livets mest personliga och betydelsefulla relationer. Med dokumenterad spetskompetens och ett stort personligt engagemang guidar vi dig genom både förebyggande juridik och akuta tvister. Vi erbjuder strategisk och mänsklig rådgivning vid skilsmässor, vårdnadstvister, boende- och umgängesfrågor, samt upprättande av juridiska dokument såsom äktenskapsförord, samboavtal, testamenten och bodelningsavtal. Hos Invictus Law kan du vara trygg i att dina och dina barns intressen tas tillvara på bästa möjliga sätt.",
+            en: "Family law concerns life's most personal and significant relationships. With documented specialist expertise and strong personal commitment, we guide you through both preventive legal work and urgent disputes. We offer strategic and human advice on divorces, custody disputes, residence and contact matters, as well as drafting legal documents such as prenuptial agreements, cohabitation agreements, wills, and property division agreements. At Invictus Law, you can be confident that your and your children's interests are safeguarded in the best possible way.",
+          },
+          {
+            sv: "Vår chefsjurist har dessutom under många år haft ett nära samarbete med kvinnojouren i Malmö och besitter en djupgående erfarenhet av att företräda kvinnor i mycket svåra och utsatta livssituationer. Denna mångåriga erfarenhet ger oss en unik förmåga att kombinera absolut juridisk skärpa med den empati, trygghet och det skyddsperspektiv som krävs när situationen är som mest komplex och känslomässigt krävande.",
+            en: "Our Chief Legal Counsel has also worked closely with the women's shelter in Malmö for many years and has deep experience representing women in very difficult and vulnerable life situations. This long-standing experience gives us a unique ability to combine absolute legal precision with the empathy, security, and protective perspective required when a situation is at its most complex and emotionally demanding.",
           },
         ],
       },
