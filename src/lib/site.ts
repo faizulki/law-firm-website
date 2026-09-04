@@ -8,7 +8,7 @@ export const site = {
   tagline: "Justice Without Compromise",
   description:
     "Invictus Law provides strategic, results-driven legal representation for individuals and businesses in corporate, family, real estate, and litigation matters.",
-  url: "https://invictuslaw.com",
+  url: "https://invictuslaw.se",
   email: "contact@invictuslaw.com",
   phone: "(555) 123-4567",
   phoneHref: "tel:+15551234567",
