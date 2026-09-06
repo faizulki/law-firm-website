@@ -28,6 +28,7 @@ export const nav = [
   { label: "Våra rättsområden", href: "/services" },
   { label: "Konsultation", href: "/consultation" },
   { label: "Priser", href: "/priser" },
+  { label: "Blogg", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

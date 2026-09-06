@@ -33,6 +33,7 @@ export function Footer() {
     { href: "/services", label: t.nav.services },
     { href: "/consultation", label: t.nav.consultation },
     { href: "/priser", label: t.nav.priser },
+    { href: "/blog", label: t.nav.blog },
     { href: "/contact", label: t.nav.contact },
   ];
   const legalItems = [

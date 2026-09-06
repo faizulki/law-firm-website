@@ -6,6 +6,10 @@ services:
       - "3000"
     environment:
       - NODE_ENV=production
+      - SORO_WEBHOOK_TOKEN=${SORO_WEBHOOK_TOKEN}
+    volumes:
+      # Named volume so published articles survive image rebuilds/redeploys.
+      - articles_data:/app/data
 
   caddy:
     image: caddy:2-alpine
@@ -23,3 +27,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  articles_data:

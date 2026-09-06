@@ -29,6 +29,7 @@ export const dictionary = {
       services: "Våra rättsområden",
       consultation: "Konsultation",
       priser: "Priser",
+      blog: "Blogg",
       contact: "Kontakt",
     },
     a11y: {
@@ -139,6 +140,13 @@ export const dictionary = {
       ctaTitle: "Osäker på vad som gäller i ditt fall?",
       ctaSubtitle:
         "Vi hjälper dig att ansöka om rättsskydd eller rättshjälp om vi bedömer att du har möjlighet att beviljas sådan hjälp.",
+    },
+    blog: {
+      eyebrow: "Blogg",
+      title: "Nyheter och juridiska insikter",
+      intro: "Guider, uppdateringar och analyser från Invictus Law.",
+      empty: "Inga artiklar publicerade ännu. Kom snart tillbaka.",
+      back: "Till bloggen",
     },
     consultation: {
       eyebrow: "Boka en konsultation",
@@ -338,6 +346,7 @@ export const dictionary = {
       services: "Practice Areas",
       consultation: "Consultation",
       priser: "Pricing",
+      blog: "Blog",
       contact: "Contact",
     },
     a11y: {
@@ -448,6 +457,13 @@ export const dictionary = {
       ctaTitle: "Unsure what applies in your case?",
       ctaSubtitle:
         "We will help you apply for legal protection or legal aid if we judge that you may be granted such help.",
+    },
+    blog: {
+      eyebrow: "Blog",
+      title: "News and legal insights",
+      intro: "Guides, updates, and analysis from Invictus Law.",
+      empty: "No articles published yet. Check back soon.",
+      back: "Back to blog",
     },
     consultation: {
       eyebrow: "Book a consultation",

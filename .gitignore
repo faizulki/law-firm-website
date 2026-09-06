@@ -32,6 +32,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# locally-stored data (webhook-published articles) — persisted via a
+# Docker volume in production, not committed
+/data
 
 # vercel
 .vercel

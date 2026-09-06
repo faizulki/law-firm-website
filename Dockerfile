@@ -17,6 +17,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -26,5 +27,6 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV ARTICLES_DATA_PATH=/app/data/articles.json
 
 CMD ["node", "server.js"]
