@@ -7,8 +7,10 @@ services:
     environment:
       - NODE_ENV=production
       - SORO_WEBHOOK_TOKEN=${SORO_WEBHOOK_TOKEN}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
-      # Named volume so published articles survive image rebuilds/redeploys.
+      # Named volume so published articles and admin-edited content survive
+      # image rebuilds/redeploys.
       - articles_data:/app/data
 
   caddy:

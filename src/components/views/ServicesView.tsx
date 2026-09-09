@@ -5,10 +5,12 @@ import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTABanner } from "@/components/CTABanner";
-import { practiceAreas, pick } from "@/lib/content";
+import { pick } from "@/lib/content";
+import { useSiteData } from "@/lib/site-data";
 
 export function ServicesView() {
   const { t, lang } = useLang();
+  const { practiceAreas } = useSiteData();
 
   return (
     <>

@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n";
+import { SiteDataProvider } from "@/lib/site-data";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SkipLink } from "@/components/SkipLink";
 import { site } from "@/lib/site";
+import { getEffectiveDictionary, getEffectiveSite, getEffectivePracticeAreaText } from "@/lib/content-store";
+
+// Site content can be edited from /admin between deploys, so every page
+// must read fresh data on every request rather than being statically
+// cached at build time.
+export const dynamic = "force-dynamic";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,55 +27,62 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s — ${site.name}`,
-  },
-  description: site.description,
-  keywords: [
-    "law firm",
-    "attorney",
-    "corporate law",
-    "family law",
-    "real estate law",
-    "litigation",
-    "legal counsel",
-    "Malmö lawyer",
-  ],
-  authors: [{ name: site.name }],
-  openGraph: {
-    type: "website",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    url: site.url,
-    siteName: site.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-  },
-  robots: { index: true, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const effectiveSite = getEffectiveSite();
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: `${effectiveSite.name} — ${effectiveSite.tagline}`,
+      template: `%s — ${effectiveSite.name}`,
+    },
+    description: effectiveSite.description,
+    keywords: [
+      "law firm",
+      "attorney",
+      "corporate law",
+      "family law",
+      "real estate law",
+      "litigation",
+      "legal counsel",
+      "Malmö lawyer",
+    ],
+    authors: [{ name: effectiveSite.name }],
+    openGraph: {
+      type: "website",
+      title: `${effectiveSite.name} — ${effectiveSite.tagline}`,
+      description: effectiveSite.description,
+      url: site.url,
+      siteName: effectiveSite.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${effectiveSite.name} — ${effectiveSite.tagline}`,
+      description: effectiveSite.description,
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const effectiveSite = getEffectiveSite();
+  const effectiveDictionary = getEffectiveDictionary();
+  const practiceAreaOverrides = getEffectivePracticeAreaText();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: site.name,
-    description: site.description,
+    name: effectiveSite.name,
+    description: effectiveSite.description,
     url: site.url,
-    telephone: site.phone,
-    email: site.email,
+    telephone: effectiveSite.phone,
+    email: effectiveSite.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.line1,
+      streetAddress: effectiveSite.address.line1,
       addressLocality: "Malmö",
       addressRegion: "Skåne",
       postalCode: "211 75",
@@ -85,14 +99,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <LanguageProvider>
-          <SkipLink />
-          <Navbar />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </LanguageProvider>
+        <SiteDataProvider site={effectiveSite} practiceAreaOverrides={practiceAreaOverrides}>
+          <LanguageProvider dictionary={effectiveDictionary}>
+            <SkipLink />
+            <Navbar />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </LanguageProvider>
+        </SiteDataProvider>
       </body>
     </html>
   );

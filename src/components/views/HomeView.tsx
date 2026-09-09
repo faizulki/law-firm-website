@@ -7,16 +7,12 @@ import { Reveal, Stagger, RevealItem } from "@/components/ui/Reveal";
 import { PracticeAreaCard } from "@/components/PracticeAreaCard";
 import { CTABanner } from "@/components/CTABanner";
 import { Hero } from "@/components/Hero";
-import {
-  practiceAreas,
-  stats,
-  differentiators,
-  testimonials,
-  pick,
-} from "@/lib/content";
+import { stats, differentiators, testimonials, pick } from "@/lib/content";
+import { useSiteData } from "@/lib/site-data";
 
 export function HomeView() {
   const { t, lang } = useLang();
+  const { practiceAreas } = useSiteData();
 
   return (
     <>

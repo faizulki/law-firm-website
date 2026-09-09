@@ -53,6 +53,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const isAdmin = pathname.startsWith("/admin");
+
   const navItems = [
     { href: "/", label: t.nav.home },
     { href: "/about", label: t.nav.about },
@@ -79,6 +81,8 @@ export function Navbar() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  if (isAdmin) return null;
 
   return (
     <header

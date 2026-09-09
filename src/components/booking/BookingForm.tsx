@@ -24,8 +24,9 @@ import {
   type Booking,
   type ConsultationType,
 } from "@/lib/booking";
-import { practiceAreas, pick } from "@/lib/content";
-import { site } from "@/lib/site";
+import { pick } from "@/lib/content";
+import { useSiteData } from "@/lib/site-data";
+import type { SiteConfig } from "@/lib/site-data";
 
 type Step = 0 | 1 | 2;
 
@@ -48,6 +49,7 @@ const fade = {
 
 export function BookingForm() {
   const { t, lang } = useLang();
+  const { practiceAreas, site } = useSiteData();
   const STEPS = t.booking.steps;
 
   const types: { id: ConsultationType; label: string; duration: string; desc: string }[] = [
@@ -122,6 +124,7 @@ export function BookingForm() {
         t={t}
         locale={t.locale}
         typeLabel={typeLabel(confirmed.consultationType)}
+        site={site}
       />
     );
   }
@@ -479,11 +482,13 @@ function Confirmation({
   t,
   locale,
   typeLabel,
+  site,
 }: {
   booking: Booking;
   t: Dict;
   locale: string;
   typeLabel: string;
+  site: SiteConfig;
 }) {
   return (
     <motion.div

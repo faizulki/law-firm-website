@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { site } from "@/lib/site";
 import { useT } from "@/lib/i18n";
+import { useSiteData } from "@/lib/site-data";
 import { Logo } from "./Logo";
 
 /** Minimal X (Twitter) glyph — lucide ships no current X mark. */
@@ -26,6 +27,8 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
 
 export function Footer() {
   const t = useT();
+  const { site } = useSiteData();
+  const pathname = usePathname();
 
   const navItems = [
     { href: "/", label: t.nav.home },
@@ -40,6 +43,8 @@ export function Footer() {
     { href: "/privacy", label: t.legal.privacyTitle },
     { href: "/terms", label: t.legal.termsTitle },
   ];
+
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <footer className="border-t border-steel/60 bg-ink-2">

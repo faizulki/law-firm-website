@@ -6,10 +6,11 @@ import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/ContactForm";
-import { site } from "@/lib/site";
+import { useSiteData } from "@/lib/site-data";
 
 export function ContactView() {
   const t = useT();
+  const { site } = useSiteData();
 
   const details: {
     icon: LucideIcon;

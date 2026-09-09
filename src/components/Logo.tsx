@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { useSiteData } from "@/lib/site-data";
 
 /** Brand lockup — logo mark + wordmark, links home. */
 export function Logo({ className }: { className?: string }) {
+  const { site } = useSiteData();
+
   return (
     <Link
       href="/"
