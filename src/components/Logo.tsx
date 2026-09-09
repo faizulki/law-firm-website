@@ -13,7 +13,11 @@ export function Logo({ className }: { className?: string }) {
       className={`group inline-flex items-center gap-3 ${className ?? ""}`}
     >
       <Image
-        src="/logo-bronze.png"
+        // Filename carries a version suffix (bump it whenever the artwork
+        // changes) so browsers/Next's image optimizer can't serve a stale
+        // cached copy for up to 4 hours after a redeploy — Next 16 blocks
+        // query-string cache-busting on local images by default.
+        src="/logo-bronze-v2.png"
         alt=""
         width={64}
         height={64}
