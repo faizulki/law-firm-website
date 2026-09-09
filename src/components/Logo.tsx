@@ -15,10 +15,10 @@ export function Logo({ className }: { className?: string }) {
       <Image
         src="/logo-bronze.png"
         alt=""
-        width={56}
-        height={56}
+        width={64}
+        height={64}
         priority
-        className="h-14 w-14 object-contain drop-shadow-[0_0_14px_rgba(111,130,138,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="h-16 w-16 object-contain drop-shadow-[0_0_14px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-105"
       />
       <span className="flex flex-col leading-none">
         <span className="font-serif text-lg font-semibold tracking-[0.18em] text-bronze">
