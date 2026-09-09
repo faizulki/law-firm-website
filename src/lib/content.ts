@@ -41,23 +41,73 @@ export type PracticeArea = {
 
 export const practiceAreas: PracticeArea[] = [
   {
-    slug: "serveringstillstand",
-    icon: FileText,
-    title: { sv: "Serveringstillstånd", en: "Liquor Licensing" },
+    slug: "familjeratt",
+    icon: Users,
+    title: { sv: "Familjerätt", en: "Family Law" },
     short: {
-      sv: "Ansökan, tillsynsärenden och överklaganden av serveringstillstånd för restauranger, hotell och krogar.",
-      en: "Applications, supervisory matters, and appeals for liquor licenses for restaurants, hotels, and bars.",
+      sv: "Strategisk och mänsklig rådgivning vid skilsmässa, vårdnadstvister och upprättande av familjerättsliga avtal.",
+      en: "Strategic and human advice on divorce, custody disputes, and drafting family-law agreements.",
     },
     sections: [
       {
         paragraphs: [
           {
-            sv: "Att ansöka om eller behålla ett serveringstillstånd kräver djupgående kunskap om alkohollagen och lokala riktlinjer. Processen är ofta rigorös med höga krav på personlig och ekonomisk lämplighet samt strikta vandelsprövningar. Invictus Law biträder restauranger, hotell och andra aktörer genom hela processen – från den initiala ansökan och dialogen med kommunen till strategisk rådgivning vid tillsynsärenden, varningar eller hot om återkallelse. Med vår expertis minimerar vi riskerna och maximerar era chanser till ett positivt beslut.",
-            en: "Applying for or retaining a liquor license requires in-depth knowledge of the Alcohol Act and local guidelines. The process is often rigorous, with high demands on personal and financial suitability and strict conduct assessments. Invictus Law assists restaurants, hotels, and other operators through the entire process — from the initial application and dialogue with the municipality to strategic advice during supervisory matters, warnings, or threats of revocation. With our expertise, we minimise the risks and maximise your chances of a favourable decision.",
+            sv: "Familjerätten rör livets mest personliga och betydelsefulla relationer. Med dokumenterad spetskompetens och ett stort personligt engagemang guidar vi dig genom både förebyggande juridik och akuta tvister. Vi erbjuder strategisk och mänsklig rådgivning vid skilsmässor, vårdnadstvister, boende- och umgängesfrågor, samt upprättande av juridiska dokument såsom äktenskapsförord, samboavtal, testamenten och bodelningsavtal. Hos Invictus Law kan du vara trygg i att dina och dina barns intressen tas tillvara på bästa möjliga sätt.",
+            en: "Family law concerns life's most personal and significant relationships. With documented specialist expertise and strong personal commitment, we guide you through both preventive legal work and urgent disputes. We offer strategic and human advice on divorces, custody disputes, residence and contact matters, as well as drafting legal documents such as prenuptial agreements, cohabitation agreements, wills, and property division agreements. At Invictus Law, you can be confident that your and your children's interests are safeguarded in the best possible way.",
           },
           {
-            sv: "Flera av våra kunder är idag verksamma inom både restaurang- och krogbranschen, det ger oss en unik inblick i de olika tillstånd som ges av myndigheter för både serveringen och alkohol.",
-            en: "Several of our clients are today active in both the restaurant and bar industry, which gives us a unique insight into the various permits issued by authorities for both service and alcohol.",
+            sv: "Vår chefsjurist har dessutom under många år haft ett nära samarbete med kvinnojouren i Malmö och besitter en djupgående erfarenhet av att företräda kvinnor i mycket svåra och utsatta livssituationer. Denna mångåriga erfarenhet ger oss en unik förmåga att kombinera absolut juridisk skärpa med den empati, trygghet och det skyddsperspektiv som krävs när situationen är som mest komplex och känslomässigt krävande.",
+            en: "Our Chief Legal Counsel has also worked closely with the women's shelter in Malmö for many years and has deep experience representing women in very difficult and vulnerable life situations. This long-standing experience gives us a unique ability to combine absolute legal precision with the empathy, security, and protective perspective required when a situation is at its most complex and emotionally demanding.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "socialratt",
+    icon: Scale,
+    title: { sv: "Socialrätt", en: "Social Law" },
+    short: {
+      sv: "Engagerat stöd i socialrättsliga tvångsvårdsmål som LVU, LVM och LPT — som offentligt biträde eller privat ombud.",
+      en: "Dedicated support in social-law compulsory care cases such as LVU, LVM, and LPT — as public counsel or private representative.",
+    },
+    sections: [
+      {
+        paragraphs: [
+          {
+            sv: "Socialrätten rymmer komplexa frågor som rör individens skydd och rättigheter i samhället, inklusive tvångsvårdsmål såsom LVU, LVM och LPT. Invictus Law har spetskompetens inom socialrätt och erbjuder ett engagerat och juridiskt skarpt stöd i situationer som ofta är både akuta och känslomässigt påfrestande. Vi agerar som offentligt biträde eller privat ombud och kämpar för att säkerställa att myndigheternas handläggning sker rättssäkert och att individens röst blir hörd i domstol.",
+            en: "Social law encompasses complex issues concerning an individual's protection and rights in society, including compulsory care cases such as LVU, LVM, and LPT. Invictus Law has specialist expertise in social law and offers dedicated, legally sharp support in situations that are often both urgent and emotionally demanding. We act as public counsel or private representative and fight to ensure that authorities' handling is legally sound and that the individual's voice is heard in court.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "migrationsratt",
+    icon: Globe,
+    title: { sv: "Migrationsrätt", en: "Migration Law" },
+    short: {
+      sv: "Trygg vägledning genom det nya, strängare regelverket kring uppehållstillstånd, medborgarskap och asyl.",
+      en: "Confident guidance through the new, stricter rules on residence permits, citizenship, and asylum.",
+    },
+    sections: [
+      {
+        paragraphs: [
+          {
+            sv: "Det migrationsrättsliga landskapet är i ständig förändring, vilket har blivit särskilt tydligt under 2026 i och med de omfattande och strikta lagändringar som skett avseende kraven för både permanent uppehållstillstånd och svenskt medborgarskap. Dessa nya regelverk har skapat en stor osäkerhet och innebär skärpta villkor kring bland annat försörjning, vandel och språkkunskaper.",
+            en: "The migration law landscape is constantly changing, which has become especially clear during 2026 with the extensive and strict legislative changes affecting the requirements for both permanent residence permits and Swedish citizenship. These new rules have created considerable uncertainty and mean stricter conditions regarding, among other things, income, conduct, and language proficiency.",
+          },
+          {
+            sv: "På Invictus Law hjälper vi dig att navigera i detta nya juridiska landskap, tolka hur de senaste lagändringarna påverkar just din situation och strategiskt planera samt anpassa din ansökan för att maximera chanserna till bifall under de nya, strängare förutsättningarna. Det migrationsrättsliga landskapet är strikt och kräver absolut precision i varje moment.",
+            en: "At Invictus Law, we help you navigate this new legal landscape, interpret how the latest legislative changes affect your specific situation, and strategically plan and tailor your application to maximise your chances of approval under the new, stricter conditions. The migration law landscape is strict and demands absolute precision at every step.",
+          },
+          {
+            sv: "På Invictus Law biträder vi klienter i ärenden som rör asyl, arbetstillstånd, uppehållstillstånd för egna företagare, familjeåterförening och svenskt medborgarskap och företräder dig i dessa processer.",
+            en: "At Invictus Law, we assist clients in matters concerning asylum, work permits, residence permits for self-employed individuals, family reunification, and Swedish citizenship, and represent you throughout these processes.",
+          },
+          {
+            sv: "Då vår chefsjurist har värdefull erfarenhet av att ha arbetat på Migrationsverket, besitter vi en djupgående förståelse för myndighetens interna beslutsprocesser och bedömningsgrunder. Vi hjälper er att strukturera er ansökan rätt från början eller att driva ert ärende vidare vid ett eventuellt avslag.",
+            en: "As our Chief Legal Counsel has valuable experience working at the Swedish Migration Agency, we have an in-depth understanding of the agency's internal decision-making processes and grounds for assessment. We help you structure your application correctly from the outset, or pursue your case further in the event of a rejection.",
           },
         ],
       },
@@ -90,25 +140,6 @@ export const practiceAreas: PracticeArea[] = [
     ],
   },
   {
-    slug: "socialratt",
-    icon: Scale,
-    title: { sv: "Socialrätt", en: "Social Law" },
-    short: {
-      sv: "Engagerat stöd i socialrättsliga tvångsvårdsmål som LVU, LVM och LPT — som offentligt biträde eller privat ombud.",
-      en: "Dedicated support in social-law compulsory care cases such as LVU, LVM, and LPT — as public counsel or private representative.",
-    },
-    sections: [
-      {
-        paragraphs: [
-          {
-            sv: "Socialrätten rymmer komplexa frågor som rör individens skydd och rättigheter i samhället, inklusive tvångsvårdsmål såsom LVU, LVM och LPT. Invictus Law har spetskompetens inom socialrätt och erbjuder ett engagerat och juridiskt skarpt stöd i situationer som ofta är både akuta och känslomässigt påfrestande. Vi agerar som offentligt biträde eller privat ombud och kämpar för att säkerställa att myndigheternas handläggning sker rättssäkert och att individens röst blir hörd i domstol.",
-            en: "Social law encompasses complex issues concerning an individual's protection and rights in society, including compulsory care cases such as LVU, LVM, and LPT. Invictus Law has specialist expertise in social law and offers dedicated, legally sharp support in situations that are often both urgent and emotionally demanding. We act as public counsel or private representative and fight to ensure that authorities' handling is legally sound and that the individual's voice is heard in court.",
-          },
-        ],
-      },
-    ],
-  },
-  {
     slug: "tillstandsarenden-lss-hvb",
     icon: Building2,
     title: {
@@ -131,31 +162,23 @@ export const practiceAreas: PracticeArea[] = [
     ],
   },
   {
-    slug: "migrationsratt",
-    icon: Globe,
-    title: { sv: "Migrationsrätt", en: "Migration Law" },
+    slug: "serveringstillstand",
+    icon: FileText,
+    title: { sv: "Serveringstillstånd", en: "Liquor Licensing" },
     short: {
-      sv: "Trygg vägledning genom det nya, strängare regelverket kring uppehållstillstånd, medborgarskap och asyl.",
-      en: "Confident guidance through the new, stricter rules on residence permits, citizenship, and asylum.",
+      sv: "Ansökan, tillsynsärenden och överklaganden av serveringstillstånd för restauranger, hotell och krogar.",
+      en: "Applications, supervisory matters, and appeals for liquor licenses for restaurants, hotels, and bars.",
     },
     sections: [
       {
         paragraphs: [
           {
-            sv: "Det migrationsrättsliga landskapet är i ständig förändring, vilket har blivit särskilt tydligt under 2026 i och med de omfattande och strikta lagändringar som skett avseende kraven för både permanent uppehållstillstånd och svenskt medborgarskap. Dessa nya regelverk har skapat en stor osäkerhet och innebär skärpta villkor kring bland annat försörjning, vandel och språkkunskaper.",
-            en: "The migration law landscape is constantly changing, which has become especially clear during 2026 with the extensive and strict legislative changes affecting the requirements for both permanent residence permits and Swedish citizenship. These new rules have created considerable uncertainty and mean stricter conditions regarding, among other things, income, conduct, and language proficiency.",
+            sv: "Att ansöka om eller behålla ett serveringstillstånd kräver djupgående kunskap om alkohollagen och lokala riktlinjer. Processen är ofta rigorös med höga krav på personlig och ekonomisk lämplighet samt strikta vandelsprövningar. Invictus Law biträder restauranger, hotell och andra aktörer genom hela processen – från den initiala ansökan och dialogen med kommunen till strategisk rådgivning vid tillsynsärenden, varningar eller hot om återkallelse. Med vår expertis minimerar vi riskerna och maximerar era chanser till ett positivt beslut.",
+            en: "Applying for or retaining a liquor license requires in-depth knowledge of the Alcohol Act and local guidelines. The process is often rigorous, with high demands on personal and financial suitability and strict conduct assessments. Invictus Law assists restaurants, hotels, and other operators through the entire process — from the initial application and dialogue with the municipality to strategic advice during supervisory matters, warnings, or threats of revocation. With our expertise, we minimise the risks and maximise your chances of a favourable decision.",
           },
           {
-            sv: "På Invictus Law hjälper vi dig att navigera i detta nya juridiska landskap, tolka hur de senaste lagändringarna påverkar just din situation och strategiskt planera samt anpassa din ansökan för att maximera chanserna till bifall under de nya, strängare förutsättningarna. Det migrationsrättsliga landskapet är strikt och kräver absolut precision i varje moment.",
-            en: "At Invictus Law, we help you navigate this new legal landscape, interpret how the latest legislative changes affect your specific situation, and strategically plan and tailor your application to maximise your chances of approval under the new, stricter conditions. The migration law landscape is strict and demands absolute precision at every step.",
-          },
-          {
-            sv: "På Invictus Law biträder vi klienter i ärenden som rör asyl, arbetstillstånd, uppehållstillstånd för egna företagare, familjeåterförening och svenskt medborgarskap och företräder dig i dessa processer.",
-            en: "At Invictus Law, we assist clients in matters concerning asylum, work permits, residence permits for self-employed individuals, family reunification, and Swedish citizenship, and represent you throughout these processes.",
-          },
-          {
-            sv: "Då vår chefsjurist har värdefull erfarenhet av att ha arbetat på Migrationsverket, besitter vi en djupgående förståelse för myndighetens interna beslutsprocesser och bedömningsgrunder. Vi hjälper er att strukturera er ansökan rätt från början eller att driva ert ärende vidare vid ett eventuellt avslag.",
-            en: "As our Chief Legal Counsel has valuable experience working at the Swedish Migration Agency, we have an in-depth understanding of the agency's internal decision-making processes and grounds for assessment. We help you structure your application correctly from the outset, or pursue your case further in the event of a rejection.",
+            sv: "Flera av våra kunder är idag verksamma inom både restaurang- och krogbranschen, det ger oss en unik inblick i de olika tillstånd som ges av myndigheter för både serveringen och alkohol.",
+            en: "Several of our clients are today active in both the restaurant and bar industry, which gives us a unique insight into the various permits issued by authorities for both service and alcohol.",
           },
         ],
       },
@@ -201,29 +224,6 @@ export const practiceAreas: PracticeArea[] = [
           {
             sv: "Vi erbjuder expertis vid tillsynsärenden, anmärkningar och anmälningar till Inspektionen för vård och omsorg (IVO), samt vid processer i Hälso- och sjukvårdens ansvarsnämnd (HSAN) gällande legitimationsfrågor.",
             en: "We offer expertise in supervisory matters, remarks, and reports to the Health and Social Care Inspectorate (IVO), as well as in proceedings before the Medical Responsibility Board (HSAN) concerning matters of professional licensing.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "familjeratt",
-    icon: Users,
-    title: { sv: "Familjerätt", en: "Family Law" },
-    short: {
-      sv: "Strategisk och mänsklig rådgivning vid skilsmässa, vårdnadstvister och upprättande av familjerättsliga avtal.",
-      en: "Strategic and human advice on divorce, custody disputes, and drafting family-law agreements.",
-    },
-    sections: [
-      {
-        paragraphs: [
-          {
-            sv: "Familjerätten rör livets mest personliga och betydelsefulla relationer. Med dokumenterad spetskompetens och ett stort personligt engagemang guidar vi dig genom både förebyggande juridik och akuta tvister. Vi erbjuder strategisk och mänsklig rådgivning vid skilsmässor, vårdnadstvister, boende- och umgängesfrågor, samt upprättande av juridiska dokument såsom äktenskapsförord, samboavtal, testamenten och bodelningsavtal. Hos Invictus Law kan du vara trygg i att dina och dina barns intressen tas tillvara på bästa möjliga sätt.",
-            en: "Family law concerns life's most personal and significant relationships. With documented specialist expertise and strong personal commitment, we guide you through both preventive legal work and urgent disputes. We offer strategic and human advice on divorces, custody disputes, residence and contact matters, as well as drafting legal documents such as prenuptial agreements, cohabitation agreements, wills, and property division agreements. At Invictus Law, you can be confident that your and your children's interests are safeguarded in the best possible way.",
-          },
-          {
-            sv: "Vår chefsjurist har dessutom under många år haft ett nära samarbete med kvinnojouren i Malmö och besitter en djupgående erfarenhet av att företräda kvinnor i mycket svåra och utsatta livssituationer. Denna mångåriga erfarenhet ger oss en unik förmåga att kombinera absolut juridisk skärpa med den empati, trygghet och det skyddsperspektiv som krävs när situationen är som mest komplex och känslomässigt krävande.",
-            en: "Our Chief Legal Counsel has also worked closely with the women's shelter in Malmö for many years and has deep experience representing women in very difficult and vulnerable life situations. This long-standing experience gives us a unique ability to combine absolute legal precision with the empathy, security, and protective perspective required when a situation is at its most complex and emotionally demanding.",
           },
         ],
       },
