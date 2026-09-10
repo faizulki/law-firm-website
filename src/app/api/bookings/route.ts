@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createBooking, listBookedTimes, SlotTakenError } from "@/lib/bookings-store";
+import { createBooking, listUnavailableTimes, SlotTakenError } from "@/lib/bookings-store";
 import { sendBookingEmails } from "@/lib/email";
 import type { Booking, BookingInput, ConsultationType } from "@/lib/booking";
 import type { Lang } from "@/lib/dictionary";
@@ -17,14 +17,14 @@ const REQUIRED_STRING_FIELDS: (keyof BookingInput)[] = [
   "phone",
 ];
 
-/** Returns already-booked times for a date, so the UI can grey them out before submit. */
+/** Times unavailable on a date (booked or owner-blocked), so the UI can grey them out before submit. */
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const date = searchParams.get("date");
   if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     return NextResponse.json({ error: "invalid_date" }, { status: 400 });
   }
-  return NextResponse.json({ bookedTimes: listBookedTimes(date) });
+  return NextResponse.json({ unavailableTimes: listUnavailableTimes(date) });
 }
 
 export async function POST(req: Request) {

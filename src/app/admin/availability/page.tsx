@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { AdminNav } from "@/components/admin/AdminNav";
-import { AdminEditor } from "@/components/admin/AdminEditor";
+import { AvailabilityEditor } from "@/components/admin/AvailabilityEditor";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Admin",
+  title: "Tillgänglighet – Admin",
   robots: { index: false, follow: false },
 };
 
-export default function AdminPage() {
+export default function AdminAvailabilityPage() {
   return (
     <div className="mx-auto min-h-screen max-w-5xl bg-ink px-6 pt-10 lg:px-8">
       <AdminNav />
-      <AdminEditor />
+      <AvailabilityEditor />
     </div>
   );
 }

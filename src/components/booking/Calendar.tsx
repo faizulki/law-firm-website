@@ -21,9 +21,12 @@ function toISO(d: Date): string {
 export function Calendar({
   value,
   onChange,
+  blockedDates,
 }: {
   value: string | null;
   onChange: (iso: string) => void;
+  /** Whole days the owner has marked unavailable (set via /admin/availability). */
+  blockedDates?: string[];
 }) {
   const t = useT();
   const MONTHS = t.calendar.months;
@@ -49,7 +52,8 @@ export function Calendar({
 
   const isDisabled = (d: Date) => {
     const day = d.getDay();
-    return d < today || day === 0 || day === 6; // past or weekend
+    if (d < today || day === 0 || day === 6) return true; // past or weekend
+    return blockedDates?.includes(toISO(d)) ?? false;
   };
 
   return (

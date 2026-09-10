@@ -82,13 +82,25 @@ class ApiBookingProvider implements BookingProvider {
 /** The active provider. Swap this line to integrate a real scheduling backend. */
 export const bookingProvider: BookingProvider = new ApiBookingProvider();
 
-/** Already-booked times for a date, so the UI can grey them out before submit. */
-export async function getBookedTimes(date: string): Promise<string[]> {
+/** Unavailable times for a date (booked or owner-blocked), so the UI can grey them out before submit. */
+export async function getUnavailableTimes(date: string): Promise<string[]> {
   try {
     const res = await fetch(`/api/bookings?date=${encodeURIComponent(date)}`);
     if (!res.ok) return [];
     const data = await res.json().catch(() => ({}));
-    return Array.isArray(data.bookedTimes) ? data.bookedTimes : [];
+    return Array.isArray(data.unavailableTimes) ? data.unavailableTimes : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Whole days the owner has blocked off, so the Calendar can disable them. */
+export async function getBlockedDates(): Promise<string[]> {
+  try {
+    const res = await fetch("/api/availability");
+    if (!res.ok) return [];
+    const data = await res.json().catch(() => ({}));
+    return Array.isArray(data.blockedDates) ? data.blockedDates : [];
   } catch {
     return [];
   }

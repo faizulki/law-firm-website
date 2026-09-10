@@ -21,7 +21,8 @@ import { Button } from "@/components/ui/Button";
 import { Calendar } from "./Calendar";
 import {
   bookingProvider,
-  getBookedTimes,
+  getUnavailableTimes,
+  getBlockedDates,
   BookingError,
   TIME_SLOTS,
   type Booking,
@@ -72,24 +73,31 @@ export function BookingForm() {
   const [consultationType, setConsultationType] = useState<ConsultationType>("personal");
   const [date, setDate] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
-  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
+  const [unavailableTimes, setUnavailableTimes] = useState<string[]>([]);
   const [loadingTimes, setLoadingTimes] = useState(false);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-  // Refresh which times are already booked whenever the selected date changes.
+  // Whole days the owner has blocked off (see /admin/availability) — fetched
+  // once so the Calendar can disable them.
+  useEffect(() => {
+    getBlockedDates().then(setBlockedDates);
+  }, []);
+
+  // Refresh which times are unavailable whenever the selected date changes.
   // (date starts null and is only ever set to a real value by handleDateChange,
-  // so bookedTimes' initial [] already covers the no-date case.)
+  // so unavailableTimes' initial [] already covers the no-date case.)
   useEffect(() => {
     if (!date) return;
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoadingTimes(true);
-    getBookedTimes(date).then((times) => {
+    getUnavailableTimes(date).then((times) => {
       if (!cancelled) {
-        setBookedTimes(times);
+        setUnavailableTimes(times);
         setLoadingTimes(false);
       }
     });
@@ -149,7 +157,7 @@ export function BookingForm() {
       if (err instanceof BookingError && err.code === "slot_taken") {
         setSubmitError(t.booking.errSlotTaken);
         setTime(null);
-        getBookedTimes(date).then(setBookedTimes);
+        getUnavailableTimes(date).then(setUnavailableTimes);
       } else {
         setSubmitError(t.booking.errGeneric);
       }
@@ -278,7 +286,7 @@ export function BookingForm() {
                   {t.booking.step2Title}
                 </h3>
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  <Calendar value={date} onChange={handleDateChange} />
+                  <Calendar value={date} onChange={handleDateChange} blockedDates={blockedDates} />
                   <div>
                     <p className="text-sm font-medium text-mute">
                       {t.booking.availableTimes}{" "}
@@ -295,7 +303,7 @@ export function BookingForm() {
                       >
                         {TIME_SLOTS.map((slot) => {
                           const selected = time === slot;
-                          const taken = bookedTimes.includes(slot);
+                          const taken = unavailableTimes.includes(slot);
                           return (
                             <button
                               type="button"

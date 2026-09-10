@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Booking, BookingInput } from "./booking";
+import { TIME_SLOTS, type Booking, type BookingInput } from "./booking";
+import { isDateBlocked, getBlockedTimesForDate } from "./availability-store";
 
 /**
  * Server-side booking store, file-backed on the persisted Docker volume
@@ -42,14 +43,27 @@ export class SlotTakenError extends Error {
   }
 }
 
-/** Times already booked on a given date, regardless of consultation type or practice area. */
-export function listBookedTimes(date: string): string[] {
-  return readAll()
+/**
+ * Times unavailable on a given date, regardless of consultation type or
+ * practice area — merges real bookings with owner-set availability blocks
+ * (see availability-store.ts) so the UI shows one consistent "taken" set.
+ */
+export function listUnavailableTimes(date: string): string[] {
+  if (isDateBlocked(date)) {
+    // Whole day off — every slot is unavailable.
+    return [...TIME_SLOTS];
+  }
+  const booked = readAll()
     .filter((b) => b.date === date)
     .map((b) => b.time);
+  return [...new Set([...booked, ...getBlockedTimesForDate(date)])];
 }
 
 export function createBooking(input: BookingInput): Booking {
+  if (isDateBlocked(input.date) || getBlockedTimesForDate(input.date).includes(input.time)) {
+    throw new SlotTakenError();
+  }
+
   const bookings = readAll();
   const taken = bookings.some((b) => b.date === input.date && b.time === input.time);
   if (taken) throw new SlotTakenError();
