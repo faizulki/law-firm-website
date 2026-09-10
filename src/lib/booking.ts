@@ -2,20 +2,11 @@
  * Booking abstraction.
  *
  * The consultation form talks to a `BookingProvider` interface rather than any
- * specific backend. The demo ships a `LocalStorageBookingProvider` that persists
- * submissions in the browser. To go live, implement this same interface against
- * Calendly, Google Calendar, or Microsoft Bookings and swap the export at the
- * bottom — no UI changes required.
- *
- * Example future provider:
- *
- *   class CalendlyProvider implements BookingProvider {
- *     async createBooking(input) {
- *       const res = await fetch("/api/calendly", { method: "POST", body: ... });
- *       return res.json();
- *     }
- *   }
- *   export const bookingProvider: BookingProvider = new CalendlyProvider();
+ * specific backend. `ApiBookingProvider` talks to the server-side booking
+ * store (src/lib/bookings-store.ts, via /api/bookings), which enforces one
+ * booking per date+time slot. To go live against a real scheduling backend
+ * (Calendly, Google Calendar, Microsoft Bookings), implement this same
+ * interface and swap the export at the bottom — no UI changes required.
  */
 
 /** Stable, language-independent id for the consultation format. */
@@ -29,7 +20,7 @@ export const CONSULTATION_TYPE_IDS: ConsultationType[] = [
 
 export type BookingInput = {
   serviceAreaSlug: string;
-  serviceArea: string; // resolved label at submit time (for the demo record)
+  serviceArea: string; // resolved label at submit time (for the record)
   consultationType: ConsultationType;
   date: string; // ISO yyyy-mm-dd
   time: string; // HH:mm
@@ -50,53 +41,56 @@ export interface BookingProvider {
   listBookings(): Promise<Booking[]>;
 }
 
-const STORAGE_KEY = "invictus_bookings";
+/** Thrown by ApiBookingProvider when the API rejects the booking; `code` matches the API's error field. */
+export class BookingError extends Error {
+  code: string;
+  constructor(code: string, message: string) {
+    super(message);
+    this.name = "BookingError";
+    this.code = code;
+  }
+}
 
-/** Demo provider — persists bookings to localStorage. */
-class LocalStorageBookingProvider implements BookingProvider {
+class ApiBookingProvider implements BookingProvider {
   async createBooking(input: BookingInput): Promise<Booking> {
-    const booking: Booking = {
-      ...input,
-      id: this.generateId(),
-      createdAt: new Date().toISOString(),
-      status: "pending",
-    };
-
-    // Simulate a brief network round-trip so the UI feels real.
-    await new Promise((resolve) => setTimeout(resolve, 700));
-
-    const existing = await this.listBookings();
-    this.persist([booking, ...existing]);
-    return booking;
+    const res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new BookingError(
+        typeof data.error === "string" ? data.error : "server_error",
+        "Could not create booking"
+      );
+    }
+    return data as Booking;
   }
 
   async listBookings(): Promise<Booking[]> {
-    if (typeof window === "undefined") return [];
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as Booking[]) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  private persist(bookings: Booking[]) {
-    if (typeof window === "undefined") return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-  }
-
-  private generateId(): string {
-    if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-      return crypto.randomUUID();
-    }
-    return `bk_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
+    // Not exposed publicly — booking records include client PII (name,
+    // email, phone), so there's no public "list all bookings" endpoint.
+    return [];
   }
 }
 
 /** The active provider. Swap this line to integrate a real scheduling backend. */
-export const bookingProvider: BookingProvider = new LocalStorageBookingProvider();
+export const bookingProvider: BookingProvider = new ApiBookingProvider();
 
-/** Available appointment time slots (local demo schedule). */
+/** Already-booked times for a date, so the UI can grey them out before submit. */
+export async function getBookedTimes(date: string): Promise<string[]> {
+  try {
+    const res = await fetch(`/api/bookings?date=${encodeURIComponent(date)}`);
+    if (!res.ok) return [];
+    const data = await res.json().catch(() => ({}));
+    return Array.isArray(data.bookedTimes) ? data.bookedTimes : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Available appointment time slots (fixed daily schedule). */
 export const TIME_SLOTS = [
   "09:00",
   "09:30",
@@ -113,4 +107,3 @@ export const TIME_SLOTS = [
   "16:00",
   "16:30",
 ] as const;
-

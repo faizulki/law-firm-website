@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
   Calendar as CalendarIcon,
@@ -20,6 +21,8 @@ import { Button } from "@/components/ui/Button";
 import { Calendar } from "./Calendar";
 import {
   bookingProvider,
+  getBookedTimes,
+  BookingError,
   TIME_SLOTS,
   type Booking,
   type ConsultationType,
@@ -60,6 +63,7 @@ export function BookingForm() {
 
   const [step, setStep] = useState<Step>(0);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState<Booking | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -68,10 +72,37 @@ export function BookingForm() {
   const [consultationType, setConsultationType] = useState<ConsultationType>("personal");
   const [date, setDate] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
+  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
+  const [loadingTimes, setLoadingTimes] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+
+  // Refresh which times are already booked whenever the selected date changes.
+  // (date starts null and is only ever set to a real value by handleDateChange,
+  // so bookedTimes' initial [] already covers the no-date case.)
+  useEffect(() => {
+    if (!date) return;
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLoadingTimes(true);
+    getBookedTimes(date).then((times) => {
+      if (!cancelled) {
+        setBookedTimes(times);
+        setLoadingTimes(false);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [date]);
+
+  function handleDateChange(iso: string) {
+    setDate(iso);
+    setTime(null); // a time chosen for a previous date shouldn't carry over
+    setSubmitError(null);
+  }
 
   const currentArea = practiceAreas.find((a) => a.slug === serviceSlug)!;
   const serviceLabel = pick(currentArea.title, lang);
@@ -99,6 +130,7 @@ export function BookingForm() {
     e.preventDefault();
     if (!validateDetails() || !date || !time) return;
     setSubmitting(true);
+    setSubmitError(null);
     try {
       const booking = await bookingProvider.createBooking({
         serviceAreaSlug: serviceSlug,
@@ -112,6 +144,14 @@ export function BookingForm() {
         message: message.trim(),
       });
       setConfirmed(booking);
+    } catch (err) {
+      if (err instanceof BookingError && err.code === "slot_taken") {
+        setSubmitError(t.booking.errSlotTaken);
+        setTime(null);
+        getBookedTimes(date).then(setBookedTimes);
+      } else {
+        setSubmitError(t.booking.errGeneric);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -237,7 +277,7 @@ export function BookingForm() {
                   {t.booking.step2Title}
                 </h3>
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  <Calendar value={date} onChange={(iso) => setDate(iso)} />
+                  <Calendar value={date} onChange={handleDateChange} />
                   <div>
                     <p className="text-sm font-medium text-mute">
                       {t.booking.availableTimes}{" "}
@@ -248,20 +288,30 @@ export function BookingForm() {
                       )}
                     </p>
                     {date ? (
-                      <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-3">
+                      <div
+                        aria-busy={loadingTimes}
+                        className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-3"
+                      >
                         {TIME_SLOTS.map((slot) => {
                           const selected = time === slot;
+                          const taken = bookedTimes.includes(slot);
                           return (
                             <button
                               type="button"
                               key={slot}
-                              onClick={() => setTime(slot)}
+                              onClick={() => !taken && setTime(slot)}
+                              disabled={taken}
                               aria-pressed={selected}
                               className={cn(
                                 "rounded-lg border py-2.5 text-sm transition-colors duration-300",
-                                selected
-                                  ? "border-silver bg-silver font-semibold text-ink"
-                                  : "border-steel text-white/90 hover:border-silver/40"
+                                taken &&
+                                  "cursor-not-allowed border-steel/40 text-mute/30 line-through",
+                                !taken &&
+                                  selected &&
+                                  "border-silver bg-silver font-semibold text-ink",
+                                !taken &&
+                                  !selected &&
+                                  "border-steel text-white/90 hover:border-silver/40"
                               )}
                             >
                               {slot}
@@ -341,6 +391,13 @@ export function BookingForm() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {submitError && (
+            <p className="mt-6 flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-500/[0.06] px-4 py-3 text-sm text-red-300">
+              <AlertCircle size={16} className="shrink-0" />
+              {submitError}
+            </p>
+          )}
 
           {/* Navigation */}
           <div className="mt-10 flex items-center justify-between border-t border-steel/60 pt-6">

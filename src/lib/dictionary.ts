@@ -195,6 +195,8 @@ export const dictionary = {
       errEmail: "Ange din e-post.",
       errEmailValid: "Ange en giltig e-postadress.",
       errPhone: "Ange ett telefonnummer.",
+      errSlotTaken: "Den valda tiden blev precis bokad av någon annan. Välj en annan tid.",
+      errGeneric: "Kunde inte slutföra bokningen. Försök igen.",
       confTitle: "Din konsultation är bokad",
       confThanks:
         "Tack, {name}. En bekräftelse har registrerats och vårt team kontaktar dig på {email} för att bekräfta detaljerna.",
@@ -512,6 +514,8 @@ export const dictionary = {
       errEmail: "Please enter your email.",
       errEmailValid: "Please enter a valid email address.",
       errPhone: "Please enter a phone number.",
+      errSlotTaken: "That time was just booked by someone else. Please choose another time.",
+      errGeneric: "Could not complete the booking. Please try again.",
       confTitle: "Your consultation is booked",
       confThanks:
         "Thank you, {name}. A confirmation has been recorded and our team will reach out to {email} to confirm the details.",
