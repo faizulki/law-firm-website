@@ -142,6 +142,7 @@ export function BookingForm() {
         email: email.trim(),
         phone: phone.trim(),
         message: message.trim(),
+        lang,
       });
       setConfirmed(booking);
     } catch (err) {

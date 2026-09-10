@@ -8,6 +8,12 @@ services:
       - NODE_ENV=production
       - SORO_WEBHOOK_TOKEN=${SORO_WEBHOOK_TOKEN}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_FROM=${SMTP_FROM}
+      - BOOKING_NOTIFY_EMAIL=${BOOKING_NOTIFY_EMAIL}
     volumes:
       # Named volume so published articles and admin-edited content survive
       # image rebuilds/redeploys.

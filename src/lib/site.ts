@@ -9,7 +9,7 @@ export const site = {
   description:
     "Invictus Law provides strategic, results-driven legal representation for individuals and businesses in corporate, family, real estate, and litigation matters.",
   url: "https://invictuslaw.se",
-  email: "contact@invictuslaw.com",
+  email: "kontakt@invictuslaw.se",
   phone: "(555) 123-4567",
   phoneHref: "tel:+15551234567",
   address: {

@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import { createBooking, listBookedTimes, SlotTakenError } from "@/lib/bookings-store";
+import { sendBookingEmails } from "@/lib/email";
 import type { Booking, BookingInput, ConsultationType } from "@/lib/booking";
+import type { Lang } from "@/lib/dictionary";
 
 const CONSULTATION_TYPES: ConsultationType[] = ["personal", "video", "phone"];
+const LANGS: Lang[] = ["sv", "en"];
 const REQUIRED_STRING_FIELDS: (keyof BookingInput)[] = [
   "serviceAreaSlug",
   "serviceArea",
@@ -51,6 +54,7 @@ export async function POST(req: Request) {
   if (!CONSULTATION_TYPES.includes(input.consultationType as ConsultationType)) {
     return NextResponse.json({ error: "invalid_consultation_type" }, { status: 400 });
   }
+  const lang: Lang = LANGS.includes(input.lang as Lang) ? (input.lang as Lang) : "sv";
 
   let booking: Booking;
   try {
@@ -64,6 +68,7 @@ export async function POST(req: Request) {
       email: (input.email as string).trim(),
       phone: (input.phone as string).trim(),
       message: typeof input.message === "string" ? input.message.trim() : "",
+      lang,
     });
   } catch (err) {
     if (err instanceof SlotTakenError) {
@@ -72,6 +77,8 @@ export async function POST(req: Request) {
     console.error("[bookings] failed to create booking:", err);
     return NextResponse.json({ error: "server_error" }, { status: 500 });
   }
+
+  await sendBookingEmails(booking, lang);
 
   return NextResponse.json(booking, { status: 201 });
 }

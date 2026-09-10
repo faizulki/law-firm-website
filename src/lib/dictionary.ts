@@ -199,7 +199,7 @@ export const dictionary = {
       errGeneric: "Kunde inte slutföra bokningen. Försök igen.",
       confTitle: "Din konsultation är bokad",
       confThanks:
-        "Tack, {name}. En bekräftelse har registrerats och vårt team kontaktar dig på {email} för att bekräfta detaljerna.",
+        "Tack, {name}. En bekräftelse har skickats till {email}. Hör av dig om du inte ser den inom några minuter.",
       location: "Plats",
       reference: "Referens",
       returnHome: "Till startsidan",
@@ -282,12 +282,12 @@ export const dictionary = {
           },
           {
             h: "Dina val",
-            body: "Du kan begära tillgång till, rättelse av eller radering av de personuppgifter du lämnat till oss genom att kontakta oss på contact@invictuslaw.com.",
+            body: "Du kan begära tillgång till, rättelse av eller radering av de personuppgifter du lämnat till oss genom att kontakta oss på kontakt@invictuslaw.se.",
             list: [],
           },
           {
             h: "Kontakt",
-            body: "Frågor om denna policy kan ställas till contact@invictuslaw.com.",
+            body: "Frågor om denna policy kan ställas till kontakt@invictuslaw.se.",
             list: [],
           },
         ],
@@ -322,7 +322,7 @@ export const dictionary = {
           },
           {
             h: "Kontakt",
-            body: "Frågor om dessa villkor kan ställas till contact@invictuslaw.com.",
+            body: "Frågor om dessa villkor kan ställas till kontakt@invictuslaw.se.",
             list: [],
           },
         ],
@@ -518,7 +518,7 @@ export const dictionary = {
       errGeneric: "Could not complete the booking. Please try again.",
       confTitle: "Your consultation is booked",
       confThanks:
-        "Thank you, {name}. A confirmation has been recorded and our team will reach out to {email} to confirm the details.",
+        "Thank you, {name}. A confirmation has been sent to {email}. Let us know if you don't see it within a few minutes.",
       location: "Location",
       reference: "Reference",
       returnHome: "Return Home",
@@ -601,12 +601,12 @@ export const dictionary = {
           },
           {
             h: "Your Choices",
-            body: "You may request access to, correction of, or deletion of the personal information you have provided to us by contacting us at contact@invictuslaw.com.",
+            body: "You may request access to, correction of, or deletion of the personal information you have provided to us by contacting us at kontakt@invictuslaw.se.",
             list: [],
           },
           {
             h: "Contact",
-            body: "Questions about this policy may be directed to contact@invictuslaw.com.",
+            body: "Questions about this policy may be directed to kontakt@invictuslaw.se.",
             list: [],
           },
         ],
@@ -641,7 +641,7 @@ export const dictionary = {
           },
           {
             h: "Contact",
-            body: "Questions about these terms may be directed to contact@invictuslaw.com.",
+            body: "Questions about these terms may be directed to kontakt@invictuslaw.se.",
             list: [],
           },
         ],

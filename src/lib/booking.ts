@@ -9,6 +9,8 @@
  * interface and swap the export at the bottom — no UI changes required.
  */
 
+import type { Lang } from "./dictionary";
+
 /** Stable, language-independent id for the consultation format. */
 export type ConsultationType = "personal" | "video" | "phone";
 
@@ -28,6 +30,8 @@ export type BookingInput = {
   email: string;
   phone: string;
   message: string;
+  /** Visitor's active site language at booking time — used to pick the confirmation email's language. */
+  lang: Lang;
 };
 
 export type Booking = BookingInput & {
