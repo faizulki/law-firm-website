@@ -1,18 +1,25 @@
+# Pulled from Google's pull-through mirror of Docker Hub rather than
+# docker.io directly: anonymous Docker Hub pulls are rate-limited per IP
+# (100/6h) and the VPS started hitting HTTP 429s, which broke deploys.
+# Same upstream image, served by digest. Override with
+# `--build-arg NODE_IMAGE=node:22-alpine` to go back to Docker Hub.
+ARG NODE_IMAGE=mirror.gcr.io/library/node:22-alpine
+
 # --- deps: install dependencies only (cached separately from source changes) ---
-FROM node:22-alpine AS deps
+FROM ${NODE_IMAGE} AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
 # --- builder: build the Next.js app ---
-FROM node:22-alpine AS builder
+FROM ${NODE_IMAGE} AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
 # --- runner: minimal production image ---
-FROM node:22-alpine AS runner
+FROM ${NODE_IMAGE} AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
