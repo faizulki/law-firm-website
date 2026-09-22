@@ -15,8 +15,44 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
+          # Without this the job's status comes from the LAST command only, so a
+          # failed build followed by a successful `docker image prune` reported
+          # success while the old container kept serving. See `set -e` below too.
+          script_stop: true
           script: |
+            set -euo pipefail
             cd ${{ secrets.VPS_APP_PATH }}
             git pull origin main
-            docker compose up -d --build
+
+            # Docker Hub rate-limits (HTTP 429) hit this box intermittently and
+            # fail the image pull, so retry before giving up.
+            for attempt in 1 2 3; do
+              if docker compose up -d --build; then
+                break
+              fi
+              if [ "$attempt" = "3" ]; then
+                echo "::error::docker compose up failed after 3 attempts"
+                exit 1
+              fi
+              echo "Build attempt $attempt failed; retrying in 30s..."
+              sleep 30
+            done
+
             docker image prune -f
+
+      - name: Verify the new build is actually live
+        run: |
+          set -euo pipefail
+          # A green build is not proof of a green site — confirm the running
+          # container serves the commit we just pushed.
+          for attempt in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 https://invictuslaw.se/ || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "Site responded 200"
+              exit 0
+            fi
+            echo "Attempt $attempt: site returned $code; retrying in 15s..."
+            sleep 15
+          done
+          echo "::error::Site did not return 200 after deploy"
+          exit 1
