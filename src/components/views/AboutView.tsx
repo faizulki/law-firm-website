@@ -63,11 +63,11 @@ export function AboutView() {
           <Reveal delay={0.1} className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-silver/10 lg:sticky lg:top-28">
               <Image
-                src="/gabriella-levin.jpg"
+                src="/gabriella-levin-v2.jpg"
                 alt="Gabriella Levin"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
             </div>
