@@ -249,18 +249,6 @@ export function AdminEditor() {
             value={dict.home.whyIntro}
             onChange={(v) => updateDict("home", { whyIntro: v })}
           />
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field
-              label="Kundomdömen — eyebrow"
-              value={dict.home.testEyebrow}
-              onChange={(v) => updateDict("home", { testEyebrow: v })}
-            />
-            <Field
-              label="Kundomdömen — rubrik"
-              value={dict.home.testTitle}
-              onChange={(v) => updateDict("home", { testTitle: v })}
-            />
-          </div>
         </Collapsible>
 
         <Collapsible title="Bokningsbanner (visas på flera sidor)">

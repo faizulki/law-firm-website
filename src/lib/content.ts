@@ -231,14 +231,6 @@ export const practiceAreas: PracticeArea[] = [
   },
 ];
 
-export type Stat = { value: string; label: L };
-
-export const stats: Stat[] = [
-  { value: "15+", label: { sv: "Års erfarenhet", en: "Years of Experience" } },
-  { value: "500+", label: { sv: "Ärenden hanterade", en: "Cases Handled" } },
-  { value: "95%", label: { sv: "Nöjda klienter", en: "Client Satisfaction" } },
-];
-
 export type Differentiator = { title: L; description: L; icon: LucideIcon };
 
 export const differentiators: Differentiator[] = [
@@ -265,34 +257,5 @@ export const differentiators: Differentiator[] = [
       sv: "Du arbetar direkt med din jurist. Förvänta dig lyhördhet, tydlighet och rådgivning som utgår från din situation.",
       en: "You work directly with your lawyer. Expect responsiveness, clarity, and counsel tailored to your situation.",
     },
-  },
-];
-
-export type Testimonial = { quote: L; name: string; role: L };
-
-export const testimonials: Testimonial[] = [
-  {
-    quote: {
-      sv: "Invictus Law överklagade Försäkringskassans avslag och vände beslutet helt. De var kunniga, lugna och orubbliga när det gällde som mest.",
-      en: "Invictus Law appealed the Social Insurance Agency's rejection and overturned the decision entirely. They were knowledgeable, calm, and relentless when it mattered most.",
-    },
-    name: "Anders Lind",
-    role: { sv: "Klient", en: "Client" },
-  },
-  {
-    quote: {
-      sv: "Kampen om min sons assistansersättning var det tyngsta året i mitt liv. Teamet skyddade hans rätt till stöd med genuint engagemang.",
-      en: "The fight for my son's assistance compensation was the hardest year of my life. The team protected his right to support with genuine commitment.",
-    },
-    name: "Maria Johansson",
-    role: { sv: "Anhörig", en: "Family member" },
-  },
-  {
-    quote: {
-      sv: "När kommunen drog in en LSS-insats hjälpte de oss att överklaga — och vi fick rätt. Ovärderlig hjälp.",
-      en: "When the municipality withdrew an LSS support, they helped us appeal — and we won. Invaluable help.",
-    },
-    name: "Sofia Berg",
-    role: { sv: "Klient", en: "Client" },
   },
 ];

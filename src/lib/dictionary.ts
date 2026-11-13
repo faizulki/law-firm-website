@@ -53,8 +53,6 @@ export const dictionary = {
       whyTitle: "En byrå byggd på resultat",
       whyIntro:
         "Vi mäter framgång i de utfall vi uppnår och det förtroende vi förtjänar — en klient i taget.",
-      testEyebrow: "Vad klienterna säger",
-      testTitle: "Förtroende i de stunder som betyder mest",
     },
     cta: {
       title: "Boka din kostnadsfria konsultation",
@@ -372,8 +370,6 @@ export const dictionary = {
       whyTitle: "A firm built on results",
       whyIntro:
         "We measure success by the outcomes we secure and the trust we earn — one client at a time.",
-      testEyebrow: "Client Testimonials",
-      testTitle: "Trusted in the moments that matter most",
     },
     cta: {
       title: "Schedule Your Free Consultation",
