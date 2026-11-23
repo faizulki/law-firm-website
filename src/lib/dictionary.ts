@@ -240,6 +240,8 @@ export const dictionary = {
       errEmail: "Ange din e-post.",
       errEmailValid: "Ange en giltig e-postadress.",
       errMessage: "Skriv ett meddelande.",
+      errSend:
+        "Meddelandet kunde inte skickas. Försök igen eller mejla oss direkt på {email}.",
     },
     footer: {
       tagline:
@@ -557,6 +559,8 @@ export const dictionary = {
       errEmail: "Please enter your email.",
       errEmailValid: "Please enter a valid email.",
       errMessage: "Please enter a message.",
+      errSend:
+        "Your message could not be sent. Please try again or email us directly at {email}.",
     },
     footer: {
       tagline:

@@ -105,6 +105,52 @@ Referens: ${booking.id}`,
   };
 }
 
+/** Sender address and the firm inbox that receives booking + contact notifications. */
+function addresses() {
+  return {
+    from: process.env.SMTP_FROM || process.env.SMTP_USER!,
+    notifyTo: process.env.BOOKING_NOTIFY_EMAIL || process.env.SMTP_USER!,
+  };
+}
+
+export type ContactMessage = { name: string; email: string; phone: string; message: string };
+
+/**
+ * Forwards a contact-form message to the firm inbox. Unlike booking emails
+ * this is NOT best-effort: the email is the only record of the message, so
+ * the caller must tell the visitor when it fails.
+ */
+export async function sendContactEmail(msg: ContactMessage): Promise<"sent" | "not_configured" | "failed"> {
+  const transporter = getTransporter();
+  if (!transporter) {
+    console.warn("[email] SMTP not configured (SMTP_HOST/SMTP_USER/SMTP_PASSWORD); cannot send contact message");
+    return "not_configured";
+  }
+
+  const { from, notifyTo } = addresses();
+  const subjectName = msg.name.replace(/[\r\n]+/g, " ");
+  try {
+    await transporter.sendMail({
+      from,
+      to: notifyTo,
+      replyTo: msg.email,
+      subject: `Nytt meddelande via kontaktformuläret: ${subjectName}`,
+      text: `Nytt meddelande via kontaktformuläret på invictuslaw.se:
+
+Namn: ${msg.name}
+E-post: ${msg.email}
+Telefon: ${msg.phone || "(ej angivet)"}
+
+Meddelande:
+${msg.message}`,
+    });
+    return "sent";
+  } catch (err) {
+    console.error("[email] failed to send contact message:", err);
+    return "failed";
+  }
+}
+
 export async function sendBookingEmails(booking: Booking, lang: Lang): Promise<void> {
   const transporter = getTransporter();
   if (!transporter) {
@@ -112,8 +158,7 @@ export async function sendBookingEmails(booking: Booking, lang: Lang): Promise<v
     return;
   }
 
-  const from = process.env.SMTP_FROM || process.env.SMTP_USER!;
-  const notifyTo = process.env.BOOKING_NOTIFY_EMAIL || process.env.SMTP_USER!;
+  const { from, notifyTo } = addresses();
 
   const client = clientEmail(booking, lang);
   try {

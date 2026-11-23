@@ -2,31 +2,23 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useT, fmt } from "@/lib/i18n";
+import { useSiteData } from "@/lib/site-data";
 import { Button } from "./ui/Button";
 
 /**
- * ContactForm — demo contact form. Persists messages to localStorage so the
- * UI is fully functional without a backend. Swap `persistMessage` for a real
- * API/email service when going live.
+ * ContactForm — posts to /api/contact, which emails the message to the firm
+ * inbox (kontakt@invictuslaw.se). If sending fails the visitor is told so,
+ * since the email is the only record of the message.
  */
 
 type FormState = { name: string; email: string; phone: string; message: string };
 
-function persistMessage(data: FormState) {
-  if (typeof window === "undefined") return;
-  const key = "invictus_contact_messages";
-  const prev = JSON.parse(window.localStorage.getItem(key) ?? "[]");
-  window.localStorage.setItem(
-    key,
-    JSON.stringify([{ ...data, at: new Date().toISOString() }, ...prev])
-  );
-}
-
 export function ContactForm() {
   const t = useT();
+  const { site } = useSiteData();
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -36,6 +28,9 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  // Honeypot — hidden from people; bots that fill it are dropped server-side.
+  const [website, setWebsite] = useState("");
 
   function update<K extends keyof FormState>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -56,10 +51,20 @@ export function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
     setSending(true);
-    await new Promise((r) => setTimeout(r, 700));
-    persistMessage(form);
-    setSending(false);
-    setSent(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website }),
+      });
+      if (!res.ok) throw new Error(`contact_failed_${res.status}`);
+      setSent(true);
+    } catch {
+      setSubmitError(fmt(t.contact.errSend, { email: site.email }));
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
@@ -143,7 +148,29 @@ export function ContactForm() {
             <p className="mt-1.5 text-xs text-red-400">{errors.message}</p>
           )}
         </div>
+        {/* Honeypot (see /api/contact) */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+          <label htmlFor="c-website">Website</label>
+          <input
+            id="c-website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
       </div>
+
+      {submitError && (
+        <p
+          role="alert"
+          className="mt-6 flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-500/[0.06] px-4 py-3 text-sm text-red-300"
+        >
+          <AlertCircle size={16} className="shrink-0" />
+          {submitError}
+        </p>
+      )}
 
       <Button type="submit" size="lg" className="mt-7 w-full sm:w-auto" disabled={sending}>
         {sending ? (
